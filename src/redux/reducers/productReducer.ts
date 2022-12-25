@@ -20,7 +20,18 @@ const productSlice = createSlice({
     name: "productSlice",
     initialState: initialState,
     reducers: {
-        addAll: (state, action) => {}
+        sortByNameAsc: (state) => {
+            state.sort((a, b) => a.title.localeCompare(b.title))
+        },
+        sortByNameDesc: (state) => {
+            state.sort((a, b) => b.title.localeCompare(a.title))
+        },
+        sortByPriceAsc: (state) => {
+            state.sort((a, b) => a.price - b.price)
+        },
+        sortByPriceDesc: (state) => {
+            state.sort((a, b) => b.price - a.price)
+        }
         },
     extraReducers: (build) => {
         build.addCase(fetchAllProducts.fulfilled, (state, action) => {
@@ -40,4 +51,5 @@ const productSlice = createSlice({
 })
 
 const productReducer = productSlice.reducer
+export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc } = productSlice.actions;
 export default productReducer
