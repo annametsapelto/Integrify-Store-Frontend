@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductType, CreatedProductType } from '../../types/ProductType';  
 import axios, { AxiosResponse } from 'axios';
 
@@ -44,6 +44,9 @@ const productSlice = createSlice({
         },
         sortByPriceDesc: (state) => {
             state.sort((a, b) => b.price - a.price)
+        },
+        deleteItem: (state, action: PayloadAction<number>) => {
+            return state.filter(item => item.id !== action.payload)
         }
         },
     extraReducers: (build) => {
@@ -72,5 +75,5 @@ const productSlice = createSlice({
 })
 
 const productReducer = productSlice.reducer
-export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc } = productSlice.actions;
+export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, deleteItem } = productSlice.actions;
 export default productReducer
