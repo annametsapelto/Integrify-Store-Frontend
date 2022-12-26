@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ProductType } from '../../types/ProductType'; 
+import { ProductType, CreatedProductType } from '../../types/ProductType';  
+import axios, { AxiosResponse } from 'axios';
 
 const initialState: ProductType[]  = []
 
@@ -12,6 +13,18 @@ export const fetchAllProducts = createAsyncThunk(
             return data;
         } catch (e: any) {
             throw new Error(e.message);
+        }
+    }
+)
+
+export const createProduct = createAsyncThunk (
+    "createProduct",
+    async (product: CreatedProductType) => {
+        try {
+            const response: AxiosResponse<ProductType, any>= await axios.post("https://api.escuelajs.co/api/v1/products", product);
+            return response.data;
+        } catch (e){
+
         }
     }
 )
@@ -46,6 +59,14 @@ const productSlice = createSlice({
         build.addCase(fetchAllProducts.rejected, (state, action) => {
             console.log("There is an error in fetching the data.");
             return state;
+        })
+        build.addCase(createProduct.fulfilled, (state, action) => {
+            if (action.payload) {
+                state.push(action.payload);
+            } else {
+                return state;
+            }
+            
         })
     }
 })

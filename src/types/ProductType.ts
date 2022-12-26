@@ -8,3 +8,11 @@ export interface ProductType {
     category: CategoryType
     images: string[]
 }
+
+export interface CreatedProductType {
+    title: string
+    description: string
+    price: number
+    categoryId: number
+    images: string[]
+}

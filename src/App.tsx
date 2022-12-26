@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
-import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc } from './redux/reducers/productReducer';
+import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct } from './redux/reducers/productReducer';
+import { CreatedProductType } from './types/ProductType';
 
 const App = () => {
   const products = useAppSelector(state => state.productReducer);
@@ -27,6 +28,18 @@ const App = () => {
     dispatch(sortByPriceDesc());
   }
 
+  const createHandler = () => {
+    dispatch(createProduct(newProduct));
+  }
+
+  const newProduct: CreatedProductType = {
+    title: "Created product",
+    description: "A great description",
+    price: 24,
+    categoryId: 2,
+    images: []
+  }
+
   return (
     <div>
       <div>
@@ -37,6 +50,7 @@ const App = () => {
         <ul>
           {products.map(product => (<li key={product.id}>{product.title}  {product.price} €</li>))}
         </ul>
+        <button onClick={createHandler}>Create product</button>
       </div>
     </div>
   )
