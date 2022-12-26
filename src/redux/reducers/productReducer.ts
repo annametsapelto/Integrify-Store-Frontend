@@ -47,6 +47,19 @@ const productSlice = createSlice({
         },
         deleteItem: (state, action: PayloadAction<number>) => {
             return state.filter(item => item.id !== action.payload)
+        },
+        modifyProduct: (state, action: PayloadAction<ProductType>) => {
+            const foundItem = state.find(item => item.id === action.payload.id);
+            if (foundItem) {
+                return state.map(item => {
+                    if (item.id === action.payload.id) {
+                        item = action.payload;
+                    }
+                    return item
+                })
+            } else {
+                throw new Error("Item not found.");
+            }
         }
         },
     extraReducers: (build) => {
@@ -75,5 +88,5 @@ const productSlice = createSlice({
 })
 
 const productReducer = productSlice.reducer
-export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, deleteItem } = productSlice.actions;
+export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, deleteItem, modifyProduct } = productSlice.actions;
 export default productReducer
