@@ -1,11 +1,16 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
 import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct, deleteItem, modifyProduct } from './redux/reducers/productReducer';
 import { CreatedProductType, ProductType } from './types/ProductType';
 
 const App = () => {
-  const products = useAppSelector(state => state.productReducer);
+  const [toBeSearched, setToBeSearched] = useState("");
+  const products = useAppSelector(state =>  {
+      return state.productReducer.filter(item =>  {
+       return item.title.toLowerCase().includes(toBeSearched.toLowerCase())}
+      )})
   const dispatch = useAppDispatch();
+  
   console.log(products);
 
   useEffect(() => {
@@ -53,6 +58,10 @@ const App = () => {
 
   return (
     <div>
+      <div>
+        <label htmlFor='search'>Search for products</label>
+        <input type="text" name="search" id='search' value={toBeSearched} onChange={(event) => setToBeSearched(event.target.value)}></input>
+      </div>
       <div>
         <button onClick={sortHandlerAsc}>Sort A to Z</button>
         <button onClick={sortHandlerDesc}>Sort Z to A</button>
