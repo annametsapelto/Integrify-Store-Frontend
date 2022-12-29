@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import Layout from './components/Layout';
 import { useAppDispatch, useAppSelector } from './hooks/reduxHook'
 import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct, deleteItem, modifyProduct } from './redux/reducers/productReducer';
 import { CreatedProductType, ProductType } from './types/ProductType';
@@ -58,6 +59,7 @@ const App = () => {
 
   return (
     <div>
+      <Layout></Layout>
       <div>
         <label htmlFor='search'>Search for products</label>
         <input type="text" name="search" id='search' value={toBeSearched} onChange={(event) => setToBeSearched(event.target.value)}></input>
