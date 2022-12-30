@@ -1,8 +1,10 @@
+import Navigation from "./Navigation";
+
 const Header = () => {
     return(
         <div>
             <p>Logo</p>
-            <p>Navigation</p>
+            <Navigation></Navigation>
             <p>Login</p>
             <p>Register</p>
         </div>

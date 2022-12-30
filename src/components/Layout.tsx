@@ -13,12 +13,11 @@ import ProductDetail from "../pages/ProductDetail";
 const Layout = ( ) => {
     return(
     <>
+    <BrowserRouter>
     <Header></Header>
     <Outlet />
-        <BrowserRouter>
         <Routes>
             <Route path='' element={<Home />}></Route>
-            <Route path='/products' element={<Products/>}></Route>
             <Route path='/products' >
                 <Route path='' element={<Products/>}></Route>
                 <Route path=':id' element={<ProductDetail/>}></Route>
