@@ -37,8 +37,8 @@ const Products = () => {
       dispatch(createProduct(newProduct));
     }
 
-    const seeDetailsHandler = (id: string) => {
-        <Link to={id}></Link>
+    const seeDetailsHandler = (product: ProductType) => {
+        <Link to={String(product.id)}></Link>
     }
   
     const newProduct: CreatedProductType = {
@@ -62,8 +62,8 @@ const Products = () => {
         <button onClick={sortHandlerPriceAsc}>Sort by Cheapest</button>
         <button onClick={sortHandlerPriceDesc}>Sort by Most Expensive</button>
         <ul>
-          {products.map(product => (<li key={product.id} >{product.title}  {product.price} € <button onClick={(event) => seeDetailsHandler(String(product.id))}>See details</button>
-          </li>))}
+          {products.map(product => (<li key={product.id} ><Link to={String(product.id)}>{product.title}  {product.price} € <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
+          </Link></li>))}
         </ul>
         <button onClick={createHandler}>Create product</button>
       </div>
