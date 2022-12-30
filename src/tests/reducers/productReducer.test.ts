@@ -6,11 +6,12 @@ import { CreatedProductType, ProductType } from "../../types/ProductType";
 import { UserType } from "../../types/UserType";
 import server from "../shared/server";
 import { WritableDraft } from "immer/dist/internal";
+import { CartItemType } from "../../types/CartItemType";
 
 let store: ToolkitStore<{
     productReducer: WritableDraft<ProductType>[];
     userReducer: UserType[];
-    cartReducer: ProductType[];
+    cartReducer: CartItemType[];
 }, AnyAction, [ThunkMiddleware]>
 
 beforeAll(() => {

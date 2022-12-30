@@ -1,6 +1,7 @@
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import {createStore} from "../../redux/store";
 import { CreatedProductType, ProductType } from "../../types/ProductType";
+import { CartItemType } from "../../types/CartItemType";
 import { WritableDraft } from "immer/dist/internal";
 import { UserType } from "../../types/UserType";
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
@@ -9,7 +10,7 @@ import { addItemToCart, removeAllItems, removeItemFromCart } from "../../redux/r
 let store: ToolkitStore<{
     productReducer: WritableDraft<ProductType>[];
     userReducer: UserType[];
-    cartReducer: ProductType[];
+    cartReducer: CartItemType[];
 }, AnyAction, [ThunkMiddleware]>
 
 beforeEach(() => {
@@ -26,7 +27,9 @@ beforeEach(() => {
         expect(store.getState().cartReducer.length).toBe(1);
     }),
     test("Should remove one item from the cart and give length of 0", () => {
-        const testProduct: ProductType = {
+        const testProduct: CartItemType = {
+            amount: 2,
+            product: {
             id: 1,
             title: "Apple",
             price: 33,
@@ -36,14 +39,17 @@ beforeEach(() => {
                 id: 3,
                 name: "Furniture",
                 image: ""
-            }
+            }} 
+
         };
         store.dispatch(addItemToCart(testProduct));
         store.dispatch(removeItemFromCart(1));
         expect(store.getState().cartReducer.length).toBe(0);
     }),
     test("Should remove all items from the cart and give length of 0", () => {
-        const testProduct1: ProductType = {
+        const testProduct1: CartItemType = {
+            amount: 1,
+            product: {
             id: 1,
             title: "Apple",
             price: 33,
@@ -53,9 +59,12 @@ beforeEach(() => {
                 id: 3,
                 name: "Furniture",
                 image: ""
-            }
+            }}
+
         };
-        const testProduct2 = {
+        const testProduct2: CartItemType = {
+            amount: 3,
+            product: {
             id: 2,
             title: "Carving",
             price: 55,
@@ -65,7 +74,8 @@ beforeEach(() => {
                 id: 3,
                 name: "Furniture",
                 image: ""
-            }
+            }}
+
         }
         store.dispatch(addItemToCart(testProduct1));
         store.dispatch(addItemToCart(testProduct2));

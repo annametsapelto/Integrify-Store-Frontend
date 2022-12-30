@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct, deleteItem, modifyProduct } from '../redux/reducers/productReducer';
+import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct } from '../redux/reducers/productReducer';
 import { CreatedProductType, ProductType } from '../types/ProductType';
 
 const Products = () => {
