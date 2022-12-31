@@ -14,9 +14,10 @@ const Cart = () => {
     return(
         <div>
             <h1>Your cart</h1>
-            {cartItems[0] != undefined ?            
-            <ul>
-                {cartItems.map(item => (
+            {cartItems[0] != undefined ?    
+            <div> 
+                <ul>
+                    {cartItems.map(item => (
                     <li key={item.product.id}>
                         <button onClick={() => dispatch(decrementAmount(item))}><RemoveIcon/></button>
                         {item.amount} 
@@ -24,9 +25,11 @@ const Cart = () => {
                         {item.product.title} {item.product.price}
                     </li>
                 ))}
-            </ul> :
+                </ul> 
+                <button onClick={() => dispatch(removeAllItems())}>Remove all items</button>
+            </div>        
+            :
             <div><p>Your cart is empty.</p></div>}
-            <button onClick={() => dispatch(removeAllItems())}>Remove all items</button>
         </div>
     )
 }
