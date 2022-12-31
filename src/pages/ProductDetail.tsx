@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
@@ -24,11 +24,8 @@ const ProductDetail = () => {
         }))
       }
 
-      const addToCartHandler = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (pieces > 0 && pieces < 11) {
-            dispatch(addItemToCart({pieces, product}));
-        }
+      const addItems = () => {
+        dispatch(addItemToCart({pieces, product}));
       }
 
     return(
@@ -37,7 +34,6 @@ const ProductDetail = () => {
             <p>{product.description}</p>
             <p>{product.price} €</p>
             <img src={product.images[0]} alt={product.title}></img>
-            <form onSubmit={(event) => addToCartHandler(event)}>
                 <label htmlFor="pieces">Pieces</label>
                 <input 
                     type="number" 
@@ -48,8 +44,7 @@ const ProductDetail = () => {
                     placeholder="1" 
                     onChange={(event) => setPieces(parseInt(event.target.value))}>
                 </input>
-                <button type="submit">Add to cart</button>
-            </form>
+                <button onClick={() => addItems()}>Add to cart</button>
             <button onClick={() => navigate(-1)}>Return to products</button>
             <button onClick={() => deleteItemHandler(product.id)}>Delete item</button>
             <button onClick={() => modifyHandler(product)}>Modify</button>

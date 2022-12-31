@@ -1,4 +1,6 @@
 import Navigation from "./Navigation";
+import { NavLink } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Header = () => {
     return(
@@ -7,6 +9,7 @@ const Header = () => {
             <Navigation></Navigation>
             <p>Login</p>
             <p>Register</p>
+            <NavLink to="/cart"><ShoppingCartIcon /></NavLink>
         </div>
     )
 }
