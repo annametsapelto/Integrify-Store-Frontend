@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { removeAllItems } from '../redux/reducers/cartReducer';
+import { removeAllItems, incrementAmount, decrementAmount } from '../redux/reducers/cartReducer';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const Cart = () => {
     const dispatch = useAppDispatch();
@@ -15,11 +17,16 @@ const Cart = () => {
             {cartItems[0] != undefined ?            
             <ul>
                 {cartItems.map(item => (
-                    <li key={item.product.id}>{item.amount} {item.product.title} {item.product.price}</li>
+                    <li key={item.product.id}>
+                        <button onClick={() => dispatch(decrementAmount(item))}><RemoveIcon/></button>
+                        {item.amount} 
+                        <button onClick={() => dispatch(incrementAmount(item))}><AddIcon/></button> 
+                        {item.product.title} {item.product.price}
+                    </li>
                 ))}
             </ul> :
             <div><p>Your cart is empty.</p></div>}
-
+            <button onClick={() => dispatch(removeAllItems())}>Remove all items</button>
         </div>
     )
 }
