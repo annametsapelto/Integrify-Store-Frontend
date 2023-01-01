@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { removeAllItems, incrementAmount, decrementAmount } from '../redux/reducers/cartReducer';
+import { removeAllItems, incrementAmount, decrementAmount, removeItemFromCart } from '../redux/reducers/cartReducer';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
@@ -23,6 +23,7 @@ const Cart = () => {
                         {item.amount} 
                         <button onClick={() => dispatch(incrementAmount(item))}><AddIcon/></button> 
                         {item.product.title} {item.product.price}
+                        <button onClick={() => dispatch(removeItemFromCart(item))}>Remove item</button>
                     </li>
                 ))}
                 </ul> 
