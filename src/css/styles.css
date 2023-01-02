@@ -108,4 +108,29 @@ footer {
   text-decoration: underline;
 }
 
+.products {
+  margin-left: 3em;
+}
+.products h1 {
+  margin-left: 6em;
+}
+
+.products_filterButtons {
+  margin-top: 1em;
+}
+.products_filterButtons button {
+  height: 3em;
+  margin-right: 0.5em;
+  color: white;
+  background-color: #267720;
+  border-color: #185214;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+}
+.products_filterButtons button:hover {
+  background-color: #185214;
+  color: #7af871;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=styles.css.map */

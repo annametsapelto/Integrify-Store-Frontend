@@ -1,0 +1,29 @@
+@import 'variables';
+
+.products {
+    margin-left: 3em;
+
+    h1 {
+        margin-left: 6em;
+    }
+}
+
+.products_filterButtons {
+    margin-top: 1em;
+
+    button {
+        height: 3em;
+        margin-right: 0.5em;
+        color: white;
+        background-color: $mid-green;
+        border-color: $dark-green;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px $shadow-green;
+
+        &:hover {
+            background-color: $dark-green;
+            color: $light-green;
+            cursor: pointer;
+        }
+    }
+}
