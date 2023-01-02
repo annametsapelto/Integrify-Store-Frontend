@@ -169,5 +169,18 @@ footer {
 .products_list_item .products_list_texts .products_list_title p {
   margin-bottom: 1em;
 }
+.products_list_item .products_list_texts button {
+  height: 4em;
+  color: white;
+  background-color: #267720;
+  border-color: #185214;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+}
+.products_list_item .products_list_texts button:hover {
+  background-color: #185214;
+  color: #7af871;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=styles.css.map */

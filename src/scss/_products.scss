@@ -65,5 +65,20 @@
         .products_list_title p {
             margin-bottom: 1em;
         }
+
+        button {
+            height: 4em;
+            color: white;
+            background-color: $mid-green;
+            border-color: $dark-green;
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px $shadow-green;
+        
+            &:hover {
+                background-color: $dark-green;
+                color: $light-green;
+                cursor: pointer;
+            }
+        }
     }
 }
