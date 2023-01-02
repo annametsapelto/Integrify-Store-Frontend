@@ -73,7 +73,7 @@ h1 {
   margin-bottom: 3em;
 }
 
-p {
+.main_introduction {
   font-size: large;
   margin-bottom: 3em;
 }
@@ -131,6 +131,43 @@ footer {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
+}
+
+.products_list {
+  max-width: 80%;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 1em;
+}
+
+.products_list_item {
+  max-width: 20em;
+  background-color: aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  border: 1px solid rgb(91, 100, 91);
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+}
+.products_list_item img {
+  border-radius: 10px;
+  margin: 0.5em;
+  display: flex;
+  width: 19em;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+.products_list_item .products_list_texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.products_list_item .products_list_texts .products_list_title p {
+  margin-bottom: 1em;
 }
 
 /*# sourceMappingURL=styles.css.map */

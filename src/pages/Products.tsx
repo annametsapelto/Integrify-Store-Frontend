@@ -66,9 +66,18 @@ const Products = () => {
             <button onClick={sortHandlerPriceAsc}>Sort by Cheapest</button>
             <button onClick={sortHandlerPriceDesc}>Sort by Most Expensive</button>
           </div>
-          <ul>
-            {products.map(product => (<li key={product.id} ><Link to={String(product.id)}>{product.title}  {product.price} € <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
-            </Link></li>))}
+          <ul className='products_list'>
+            {products.map(product => 
+              (<li className="products_list_item" key={product.id} >
+                <Link to={String(product.id)}>
+                  <img src={product.images[0]} alt={product.title}/> 
+                  <div className='products_list_texts'>                  
+                    <p className='product_list_title'>{product.title}</p> 
+                    <p>{product.price} €</p> 
+                    <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
+                  </div>
+                </Link>
+              </li>))}
           </ul>
           <button onClick={createHandler}>Create product</button>
         </div>
