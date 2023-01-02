@@ -80,6 +80,32 @@ p {
 
 hr {
   margin-bottom: 3em;
+  margin-top: 3em;
+}
+
+footer {
+  display: flex;
+  height: 8em;
+  margin-top: 5em;
+  margin-bottom: 0;
+  align-items: center;
+}
+
+.footer_texts {
+  margin-left: 3em;
+  display: flex;
+}
+.footer_texts p {
+  margin-bottom: 1em;
+  font-size: medium;
+}
+.footer_texts .footer_nav .navigation_links_link {
+  color: black;
+  font-size: medium;
+}
+.footer_texts .footer_nav .navigation_links_link:hover {
+  color: #267720;
+  text-decoration: underline;
 }
 
 /*# sourceMappingURL=styles.css.map */

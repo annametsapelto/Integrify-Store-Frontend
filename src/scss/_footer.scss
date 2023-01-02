@@ -1,0 +1,29 @@
+@import 'variables';
+
+footer {
+    display: flex;
+    height: 8em;
+    margin-top: 5em;
+    margin-bottom: 0;
+    align-items: center;
+}
+
+.footer_texts {
+    margin-left: 3em;
+    display: flex;
+
+    p {
+        margin-bottom: 1em;
+        font-size: medium;
+    }
+
+    .footer_nav .navigation_links_link{
+        color: black;
+        font-size: medium;
+
+        &:hover {
+            color: $mid-green;
+            text-decoration: underline;
+        }
+    }
+}
