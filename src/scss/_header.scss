@@ -1,0 +1,53 @@
+@import 'variables';
+
+header {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    margin-bottom: 8em;
+    background-color: $mid-green;
+    color: white;
+}
+
+.header_logo {
+    margin: 1em;
+} 
+
+.header_navbar {
+    display: flex;
+    gap: 3em;
+    margin-bottom: 2em;
+    align-items: flex-end;
+    font-size: large;
+
+    .header_login {
+        margin: 0;
+    }
+}
+
+.navigation_links {
+    display: flex;
+    gap: 10%;
+    font-size: large;
+
+    ul {
+        list-style: none;
+
+        li {
+            float: left;
+        }
+
+        .navigation_links_link {
+            display: block;
+            color: white;
+            text-align: center;
+            padding-right: 1.5em;
+            text-decoration: none; 
+
+            &:hover {
+                color: $light-green;
+                text-decoration: underline;
+            }
+        }
+        
+    }
+}

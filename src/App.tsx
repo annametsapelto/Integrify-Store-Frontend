@@ -1,5 +1,5 @@
 import Layout from './components/Layout';
-import '../src/styles/styles.css';
+import '../src/css/styles.css';
 
 const App = () => {
 
