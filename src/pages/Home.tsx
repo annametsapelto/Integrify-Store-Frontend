@@ -9,7 +9,10 @@ const Home = () => {
             <h1>Welcome to Forestfield's!</h1>
             <p>We aim at providing you the best products available at a reasonable cost. See all out products at our <Link to="products">products page</Link>.</p>
             <hr></hr>
-            <img src={BookStack} alt="Stack of books" className="home_books"/>
+            <div className="home_books">
+                <img src={BookStack} alt="Stack of books" />
+            </div>
+            
         </div>
     </main>
     )

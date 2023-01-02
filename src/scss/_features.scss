@@ -1,0 +1,7 @@
+@import 'variables';
+
+.frame {
+    border: 2px solid $dark-green;
+    border-radius: 5em;
+    box-shadow: 3px 3px 3px $shadow-green;
+}

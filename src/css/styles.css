@@ -52,8 +52,34 @@ header {
   text-decoration: underline;
 }
 
+.frame, .home_books img {
+  border: 2px solid #185214;
+  border-radius: 5em;
+  box-shadow: 3px 3px 3px rgb(91, 100, 91);
+}
+
 main {
   text-align: center;
+}
+
+.home_books img {
+  mix-blend-mode: hard-light;
+  border: 2px solid #185214;
+  border-radius: 5em;
+  max-width: 50em;
+}
+
+h1 {
+  margin-bottom: 3em;
+}
+
+p {
+  font-size: large;
+  margin-bottom: 3em;
+}
+
+hr {
+  margin-bottom: 3em;
 }
 
 /*# sourceMappingURL=styles.css.map */

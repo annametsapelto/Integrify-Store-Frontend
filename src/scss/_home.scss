@@ -1,3 +1,26 @@
+@import 'variables';
+@import 'features';
+
 main {
     text-align: center;
+}
+
+.home_books img {
+    @extend .frame;
+    mix-blend-mode: hard-light;
+    border: 2px solid $dark-green;
+    border-radius: 5em;
+    max-width: 50em;
+}
+
+h1 {
+    margin-bottom: 3em;
+}
+
+p {
+    font-size: large;
+    margin-bottom: 3em;
+}
+hr {
+    margin-bottom: 3em;
 }
