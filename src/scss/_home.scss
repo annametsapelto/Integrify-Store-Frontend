@@ -3,6 +3,10 @@
 
 main {
     text-align: center;
+
+    h2 {
+        margin-top: 5em;
+    }
 }
 
 .home_books img {
@@ -25,3 +29,52 @@ hr {
     margin-bottom: 3em;
     margin-top: 3em;
 }
+.home_featured {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 2em;
+}
+
+.home_featured li {
+    max-width: 25em;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 1px solid $shadow-green;
+    box-shadow: 1px 1px 1px $shadow-green;
+    
+    img {
+        border-radius: 10px;
+        margin: 0.5em;
+        display: flex;
+        width: 22em;
+        height: auto;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+        button {
+            height: 3.5em;
+            padding-left: 1em;
+            padding-right: 1em;
+            color: white;
+            background-color: $mid-green;
+            border-color: $dark-green;
+            border-radius: 10px;
+            box-shadow: 1px 1px 1px $shadow-green;
+            margin-bottom: 2em;
+            font-size: medium;
+        
+            &:hover {
+                background-color: $dark-green;
+                color: $light-green;
+                cursor: pointer;
+            }
+        }
+    }

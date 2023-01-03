@@ -12,7 +12,8 @@ const Home = () => {
             <div className="home_books">
                 <img src={BookStack} alt="Stack of books" />
             </div>
-            
+            <h2>Featured</h2>
+            <Featured></Featured>
         </div>
     </main>
     )

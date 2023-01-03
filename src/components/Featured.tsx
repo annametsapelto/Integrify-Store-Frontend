@@ -34,13 +34,16 @@ const Featured = () => {
     }
 
     return (
-        <div>
-            {products !== undefined && 
-                <ul>{
-                    featured.map(product => (<li key={product.id} >
-                        <Link to={String(product.id)}>{product.title}  {product.price} € <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
-                        </Link></li>))}
-                </ul>}
+        <div> 
+            <ul className='home_featured'>{
+                featured.map(product => (
+                <li key={product.id} >
+                    <Link 
+                    to={String(product.id)}><img src={product.images[0]}></img><p>{product.title}  {product.price} € </p>
+                    <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
+                    </Link>
+                </li>))}
+            </ul>
 
             
         </div>
