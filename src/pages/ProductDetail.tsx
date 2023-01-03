@@ -13,20 +13,33 @@ const ProductDetail = () => {
     const product = useAppSelector(state => state.productReducer).filter(prod => prod.id === Number(id))[0];
     let navigate = useNavigate();
     const [pieces, setPieces] = useState(1);
+    const [productTitle, setProductTitle] = useState("");
+    const [productPrice, setProductPrice] = useState(0);
+    const [productDesc, setProductDesc] = useState("");
+    const [productCategory, setProductCategory] = useState(5);
+    const [productImages, setProductImages] = useState([]);
+    const [image1, setImage1] = useState("");
+    const [image2, setImage2] = useState("");
+    const [image3, setImage3] = useState("");
+    const [showModify, setShowModify] = useState(false);
 
     const deleteItemHandler = (id: number) => {
         dispatch(deleteItem(id));
       }
     
-      const modifyHandler = (product: ProductType) => {
-        dispatch(modifyProduct({
-          ...product,
-          title: product.title + " new"
-        }))
+      const modifyHandler = () => {
+        setShowModify(!showModify);
       }
 
       const addItems = () => {
         dispatch(addItemToCart({pieces, product}));
+      }
+
+      const handleModify = (event: React.FormEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+            dispatch(modifyProduct({
+          ...product,
+          title: product.title + " new"}))
       }
 
     return(
@@ -54,8 +67,27 @@ const ProductDetail = () => {
           <div>
             <h2>Controls</h2>
             <button onClick={() => deleteItemHandler(product.id)}>Delete item</button>
-            <button onClick={() => modifyHandler(product)}>Modify</button>
+            <button onClick={() => modifyHandler()}>Modify</button>
           </div>
+          {showModify && 
+            <div>
+            <form>
+              <InputLabel htmlFor='productTitle'>Title</InputLabel>
+              <TextField type="string" id="productTitle" name="productTitle" value={productTitle} onChange={(event) => setProductTitle(event.target.value)}></TextField>
+              <InputLabel htmlFor='productPrice'>Price</InputLabel>
+              <TextField type="number" id="productPrice" name='productPrice' value={productPrice} onChange={(event) => setProductPrice(parseInt(event.target.value))}></TextField>
+              <InputLabel htmlFor='productDesc'>Description</InputLabel>
+              <TextField type="string" id="productDesc" name='productDesc' value={productDesc} onChange={(event) => setProductDesc(event.target.value)}></TextField>
+              <InputLabel htmlFor='productCategory'>Category Id (1-5)</InputLabel>
+              <TextField type="number" id="productCategory" name='productCategory' value={productCategory} onChange={(event) => setProductCategory(parseInt(event.target.value))}></TextField>
+              <InputLabel htmlFor='productImage1'>Images</InputLabel>
+              <TextField type="string" id="productImage1" name="productImage1" value={image1} onChange={(event) => setImage1(event.target.value)}></TextField>
+              <TextField type="string" id="productImage2" name="productImage2" value={image2} onChange={(event) => setImage2(event.target.value)}></TextField>
+              <TextField type="string" id="productImage3" name="productImage3" value={image3} onChange={(event) => setImage3(event.target.value)}></TextField>
+              <button type="submit" onSubmit={(event) => handleModify(event)}>Save changes</button>
+            </form>
+          </div>}
+
       </div>
     )
 }
