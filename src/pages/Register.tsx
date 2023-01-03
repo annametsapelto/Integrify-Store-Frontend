@@ -13,7 +13,7 @@ const Register = () => {
     }
 
     return(
-        <div>
+        <div className='register'>
             <h1>Register here</h1>
             <form>
                 <InputLabel htmlFor='username'>Your username</InputLabel>

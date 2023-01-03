@@ -228,4 +228,26 @@ footer {
   margin-left: 6em;
 }
 
+.register {
+  margin: 5em;
+}
+.register h1 {
+  margin-left: 3em;
+}
+.register button {
+  font-size: large;
+  height: 3em;
+  padding: 10px;
+  background-color: #7af871;
+  border-color: #267720;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+  margin-left: 3em;
+}
+.register button:hover {
+  background-color: #267720;
+  color: #7af871;
+  cursor: pointer;
+}
+
 /*# sourceMappingURL=styles.css.map */

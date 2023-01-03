@@ -1,0 +1,24 @@
+.register {
+    margin: 5em;
+
+    h1 {
+        margin-left: 3em;
+    }
+
+    button {
+        font-size: large;
+        height: 3em;
+        padding: 10px;
+        background-color: $light-green;
+        border-color: $mid-green;
+        border-radius: 10px;
+        box-shadow: 1px 1px 1px $shadow-green;
+        margin-left: 3em;
+        
+        &:hover {
+            background-color: $mid-green;
+            color: $light-green;
+            cursor: pointer;
+        }
+    }
+}
