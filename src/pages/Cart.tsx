@@ -12,17 +12,17 @@ const Cart = () => {
         console.log("Cart:" + cartItems.length)
     }, [])
     return(
-        <div>
+        <div className='cart'>
             <h1>Your cart</h1>
             {cartItems[0] != undefined ?    
             <div> 
-                <ul>
+                <ul className='cart_list'>
                     {cartItems.map(item => (
-                    <li key={item.product.id}>
+                    <li key={item.product.id} className="cart_list_item">
                         <button onClick={() => dispatch(decrementAmount(item))}><RemoveIcon/></button>
                         {item.amount} 
                         <button onClick={() => dispatch(incrementAmount(item))}><AddIcon/></button> 
-                        {item.product.title} {item.product.price}
+                          {item.product.title}  {item.product.price} €  
                         <button onClick={() => dispatch(removeItemFromCart(item))}>Remove item</button>
                     </li>
                 ))}

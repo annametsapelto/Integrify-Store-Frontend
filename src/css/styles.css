@@ -58,7 +58,7 @@ header {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .product button {
+.basic-button, .cart button, .product button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -70,7 +70,7 @@ header {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -226,7 +226,7 @@ footer {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .product button {
+.basic-button, .cart button, .product button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -238,7 +238,7 @@ footer {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -296,7 +296,7 @@ footer {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .product button {
+.basic-button, .cart button, .product button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -308,7 +308,7 @@ footer {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -331,6 +331,48 @@ footer {
 .product .product_add {
   text-align: center;
   margin-top: 1.5em;
+}
+
+.frame, .home_books img, .about img, .product img {
+  border: 2px solid #185214;
+  border-radius: 5em;
+  box-shadow: 3px 3px 3px rgb(91, 100, 91);
+}
+
+.basic-button, .cart button, .product button {
+  height: 3.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  color: white;
+  background-color: #267720;
+  border-color: #185214;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+  margin-bottom: 2em;
+  font-size: medium;
+}
+.basic-button:hover, .cart button:hover, .product button:hover {
+  background-color: #185214;
+  color: #7af871;
+  cursor: pointer;
+}
+
+.cart {
+  margin-left: 3em;
+}
+.cart h1 {
+  margin-left: 6em;
+}
+.cart ul {
+  list-style-type: none;
+}
+.cart li {
+  margin: 1em;
+  font-size: large;
+}
+.cart button {
+  height: 3em;
+  margin: 1em;
 }
 
 /*# sourceMappingURL=styles.css.map */
