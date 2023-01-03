@@ -82,3 +82,19 @@
         }
     }
 }
+
+.products_create-new button {
+    font-size: large;
+    height: 4em;
+    padding: 10px;
+    background-color: $light-green;
+    border-color: $mid-green;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px $shadow-green;
+
+    &:hover {
+        background-color: $mid-green;
+        color: $light-green;
+        cursor: pointer;
+    }
+}

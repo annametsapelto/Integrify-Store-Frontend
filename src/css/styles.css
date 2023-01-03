@@ -52,7 +52,7 @@ header {
   text-decoration: underline;
 }
 
-.frame, .home_books img {
+.frame, .about img, .home_books img {
   border: 2px solid #185214;
   border-radius: 5em;
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
@@ -181,6 +181,44 @@ footer {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
+}
+
+.products_create-new button {
+  font-size: large;
+  height: 4em;
+  padding: 10px;
+  background-color: #7af871;
+  border-color: #267720;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px rgb(91, 100, 91);
+}
+.products_create-new button:hover {
+  background-color: #267720;
+  color: #7af871;
+  cursor: pointer;
+}
+
+.frame, .about img, .home_books img {
+  border: 2px solid #185214;
+  border-radius: 5em;
+  box-shadow: 3px 3px 3px rgb(91, 100, 91);
+}
+
+.about {
+  margin: 3em;
+  width: 60%;
+}
+.about h1 {
+  margin-left: 6em;
+}
+.about p {
+  margin-bottom: 5em;
+}
+.about .about_picture {
+  max-width: 50em;
+}
+.about .about_picture p {
+  text-align: center;
 }
 
 /*# sourceMappingURL=styles.css.map */

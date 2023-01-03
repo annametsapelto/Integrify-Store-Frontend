@@ -1,0 +1,26 @@
+@import 'variables';
+@import 'features';
+
+.about {
+    margin: 3em;
+    width: 60%;
+
+    h1 {
+        margin-left: 6em;
+    }
+
+    p {
+        margin-bottom: 5em;
+    }
+
+    .about_picture {
+        max-width: 50em;
+
+        p {
+            text-align: center;
+        }
+    }
+    img {
+        @extend .frame
+    }
+}

@@ -79,7 +79,9 @@ const Products = () => {
                 </Link>
               </li>))}
           </ul>
-          <button onClick={createHandler}>Create product</button>
+          <div className="products_create-new">
+            <button onClick={createHandler} >Create new product</button>
+          </div>
         </div>
       </div>
     )
