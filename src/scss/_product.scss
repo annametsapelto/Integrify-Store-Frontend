@@ -1,0 +1,29 @@
+@import 'features';
+
+.product {
+    margin: 3em;
+    width: 60%;
+
+    h1 {
+        margin-left: 6em;
+    }
+
+    img {
+        @extend .frame;
+    }
+
+    button {
+        @extend .basic-button; 
+        margin-left: 1em;
+    }
+
+    .product_price {
+        font-size: x-large;
+        margin-top: 1em;
+    }
+
+    .product_add {
+        text-align: center;
+        margin-top: 1.5em;
+    }
+}
