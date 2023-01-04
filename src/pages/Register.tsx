@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import { Input, InputLabel, Alert, Snackbar, Box } from '@mui/material';
-import { RegisterType } from '../types/RegisterType';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { createUser } from '../redux/reducers/userReducer';

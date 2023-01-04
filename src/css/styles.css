@@ -360,6 +360,7 @@ footer {
   border-radius: 10px;
   box-shadow: 1px 1px 1px rgb(91, 100, 91);
   margin-left: 3em;
+  margin-top: 1em;
 }
 .register button:hover {
   background-color: #267720;

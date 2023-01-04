@@ -14,7 +14,7 @@ const Cart = () => {
     return(
         <div className='cart'>
             <h1>Your cart</h1>
-            {cartItems === undefined || cartItems[0].product.id != undefined ?    
+            {cartItems != undefined || cartItems[0] != undefined ?    
             <div> 
                 <ul className='cart_list'>
                     {cartItems.map(item => (

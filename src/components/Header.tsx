@@ -1,16 +1,38 @@
 import { useState } from "react";
 import Navigation from "./Navigation";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Forestfield from '../images/Forestfield.png';
-import { Modal, InputLabel, TextField, Box } from '@mui/material';
+import { Modal, InputLabel, TextField, Box, Alert, Snackbar } from '@mui/material';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { UserLogin } from "../redux/reducers/userReducer";
 
 
 const Header = () => {
     const [openModal, setOpenModal] = useState(false);
-    const handleClose = () => setOpenModal(false);
-    const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [open, setOpen] = useState<boolean>(false);
+    const [message, setMessage] = useState<string>("");
+    const user = useAppSelector((state) => state.userReducer);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+
+    const loginHandler = () => {
+        const login = async () => {
+            await dispatch(UserLogin({email: email, password: password}))
+            .then((response) => {
+                console.log("logged in");
+                if ("error" in response) {
+                    setMessage("Error! Your email or password are not correct.");
+                    setOpen(true);
+                }
+                navigate("/");
+            })
+        }
+        login();
+    }
+    const handleClose = () => setOpenModal(false); 
     const boxStyle = {
         position: 'absolute' as 'absolute',
         top: '50%',
@@ -33,11 +55,11 @@ const Header = () => {
                 <Modal open={openModal} onClose={handleClose}>
                     <Box sx={boxStyle}>
                         <form className="login_form">
-                            <InputLabel htmlFor="username">Your username</InputLabel>
-                            <TextField type="string" value={userName} id="username" onChange={(event) => setUserName(event.target.value)}></TextField>
+                            <InputLabel htmlFor="email">Your email</InputLabel>
+                            <TextField type="string" value={email} id="email" onChange={(event) => setEmail(event.target.value)}></TextField>
                             <InputLabel htmlFor="password">Your password</InputLabel>
                             <TextField type="string" value={password} id="password" onChange={(event) => setPassword(event.target.value)}></TextField>
-                            <button>Login</button>
+                            <button onClick={() => loginHandler()}>Login</button>
                         </form>
                         <div className="login_register">
                             <p>Are you not registered yet?</p>
