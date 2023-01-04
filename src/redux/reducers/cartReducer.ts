@@ -8,43 +8,46 @@ const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addItemToCart: (state, action) => {
-            const itemInCart = state.find((item) => item.product.id === action.payload.product.id);
-            if (itemInCart) {
-                const itemAmount = action.payload.amount;
-                itemInCart.amount = itemInCart.amount + itemAmount;
+            let itemFoundInCart = false;
+            let amountInCart = 0;
+            state.forEach(item => {
+                if (item.product.id === action.payload.id) {
+                    itemFoundInCart = true;
+                    amountInCart = item.amount;
+                }
+            })
+            let newItem: CartItemType = {
+                product: action.payload,
+                amount: amountInCart +1
             }
-            else {
-                state.push(action.payload);
-            }
-        },
-        incrementAmount: (state, action) => {
-            const item = state.find((item) => item.product.id === action.payload.product.id);
-            if (item) {
-                item.amount++;
-                return state;
+            if (itemFoundInCart) {
+                return state.map(item => item.product.id === action.payload.id ? newItem : item);
             } else {
-                return;
-            } 
-        },
-        decrementAmount: (state, action) => {
-            const item = state.find((item) => item.product.id === action.payload.product.id);
-            if (item) {
-                item.amount--;
-                return state;
+                return [...state, newItem]
             }
-            
         },
         removeItemFromCart: (state, action) => {
-            const remove = state.filter(item => item.product.id !== action.payload);
-            state = remove;
+            let amountInCart = 0;
+            state.forEach(item => {
+                if (item.product.id !== action.payload.id) {
+                    amountInCart = item.amount;
+                }
+            })
+            if (amountInCart === 1) {
+                return state.filter(item => item.product.id !== action.payload.id);
+            } else {
+                let newItem: CartItemType = {
+                    product: action.payload,
+                    amount: amountInCart -1
+                }
+                return state.map(item => item.product.id === action.payload.id ? newItem : item)
+            }
         },
         removeAllItems: (state) => {
             state.length = 0;
         },
-    },
-    extraReducers: {}
+    }
 })
 
-const CartReducer = cartSlice.reducer;
-export const { addItemToCart, removeAllItems, incrementAmount, decrementAmount, removeItemFromCart } = cartSlice.actions;
-export default CartReducer;
+export default cartSlice.reducer;
+export const { addItemToCart, removeAllItems, removeItemFromCart } = cartSlice.actions;

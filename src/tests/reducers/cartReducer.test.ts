@@ -9,7 +9,7 @@ import { addItemToCart, removeAllItems, removeItemFromCart } from "../../redux/r
 
 let store: ToolkitStore<{
     productReducer: WritableDraft<ProductType>[];
-    userReducer: UserType[];
+    userReducer: UserType;
     cartReducer: CartItemType[];
 }, AnyAction, [ThunkMiddleware]>
 

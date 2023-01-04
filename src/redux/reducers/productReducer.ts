@@ -8,7 +8,7 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async() => {
         try {
-            const dataAsJson = await fetch("https://api.escuelajs.co/api/v1/products?offset=3&limit=500");
+            const dataAsJson = await fetch("https://api.escuelajs.co/api/v1/products");
             const data: ProductType[] | Error = await dataAsJson.json();
             return data;
         } catch (e: any) {

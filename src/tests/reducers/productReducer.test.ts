@@ -10,7 +10,7 @@ import { CartItemType } from "../../types/CartItemType";
 
 let store: ToolkitStore<{
     productReducer: WritableDraft<ProductType>[];
-    userReducer: UserType[];
+    userReducer: UserType;
     cartReducer: CartItemType[];
 }, AnyAction, [ThunkMiddleware]>
 

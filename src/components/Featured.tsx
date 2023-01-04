@@ -15,7 +15,6 @@ const Featured = () => {
       }, [])
       
     useEffect(() => {
-        console.log("Products: " + products[0]);
         getFeatured()
     }, [])
 
@@ -25,12 +24,6 @@ const Featured = () => {
         tempArray.push(products[20]);
         tempArray.push(products[30]);
         setFeatured(tempArray);
-        console.log("Featured: " + featured[0]);
-    }
-
-
-    const seeDetailsHandler = (product: ProductType) => {
-        <Link to={String(product.id)}></Link>
     }
 
     return (
@@ -39,8 +32,8 @@ const Featured = () => {
                 featured.map(product => (
                 <li key={product.id} >
                     <Link 
-                    to={String(product.id)}><img src={product.images[0]}></img><p>{product.title}  {product.price} € </p>
-                    <button onClick={(event) => seeDetailsHandler(product)}>See details</button>
+                    to={`/products/`+ String(product.id)}><img src={product.images[0]}></img><p>{product.title}  {product.price} € </p>
+                    <button>See details</button>
                     </Link>
                 </li>))}
             </ul>
