@@ -52,13 +52,41 @@ header {
   text-decoration: underline;
 }
 
+.login_form {
+  display: flex;
+  flex-direction: column;
+}
+.login_form button {
+  margin-top: 1em;
+}
+
+.login_register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login_register .login_link {
+  color: white;
+  text-decoration: none;
+}
+.login_register .login_link:hover {
+  color: #7af871;
+}
+
+.header_login:hover {
+  cursor: pointer;
+  color: #7af871;
+  text-decoration: underline;
+}
+
 .frame, .product img, .about img, .home_books img {
   border: 2px solid #185214;
   border-radius: 5em;
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .cart button, .product button {
+.basic-button, .cart button, .product button, .login_form button, .login_register button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -70,7 +98,7 @@ header {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .cart button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover, .login_form button:hover, .login_register button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -275,7 +303,7 @@ footer {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .cart button, .product button {
+.basic-button, .cart button, .product button, .login_form button, .login_register button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -287,7 +315,7 @@ footer {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .cart button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover, .login_form button:hover, .login_register button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -345,7 +373,7 @@ footer {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .cart button, .product button {
+.basic-button, .cart button, .product button, .login_form button, .login_register button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -357,7 +385,7 @@ footer {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .cart button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .product button:hover, .login_form button:hover, .login_register button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;
@@ -388,7 +416,7 @@ footer {
   box-shadow: 3px 3px 3px rgb(91, 100, 91);
 }
 
-.basic-button, .cart button, .product button {
+.basic-button, .cart button, .login_form button, .login_register button, .product button {
   height: 3.5em;
   padding-left: 1em;
   padding-right: 1em;
@@ -400,7 +428,7 @@ footer {
   margin-bottom: 2em;
   font-size: medium;
 }
-.basic-button:hover, .cart button:hover, .product button:hover {
+.basic-button:hover, .cart button:hover, .login_form button:hover, .login_register button:hover, .product button:hover {
   background-color: #185214;
   color: #7af871;
   cursor: pointer;

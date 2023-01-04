@@ -11,6 +11,17 @@ const Header = () => {
     const handleClose = () => setOpenModal(false);
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const boxStyle = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
+    }
  
     return(
         <header>
@@ -20,16 +31,19 @@ const Header = () => {
                 <NavLink to="/cart" className="header_cart"><ShoppingCartIcon /></NavLink>
                 <p className="header_login" onClick={() =>setOpenModal(!openModal)}>Login</p>
                 <Modal open={openModal} onClose={handleClose}>
-                    <Box>
-                        <form>
+                    <Box sx={boxStyle}>
+                        <form className="login_form">
                             <InputLabel htmlFor="username">Your username</InputLabel>
                             <TextField type="string" value={userName} id="username" onChange={(event) => setUserName(event.target.value)}></TextField>
                             <InputLabel htmlFor="password">Your password</InputLabel>
                             <TextField type="string" value={password} id="password" onChange={(event) => setPassword(event.target.value)}></TextField>
                             <button>Login</button>
                         </form>
-                        <p>Are you not registered yet?</p>
-                        <button onClick={() => handleClose()}><NavLink to="register">Register</NavLink></button>
+                        <div className="login_register">
+                            <p>Are you not registered yet?</p>
+                            <button onClick={() => handleClose()}><NavLink to="register" className="login_link">Register</NavLink></button>
+                        </div>
+                        
                     </Box>
                 </Modal>
             </div>

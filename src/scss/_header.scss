@@ -51,3 +51,42 @@ header {
         
     }
 }
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+
+    button {
+        @extend .basic-button;
+        margin-top: 1em;
+    }
+}
+
+.login_register {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        @extend .basic-button;
+
+    }
+
+    .login_link {
+        color: white;
+        text-decoration: none;
+
+        &:hover {
+            color: $light-green;
+        }
+    }
+}
+
+.header_login {
+    &:hover {
+        cursor: pointer;
+        color: $light-green;
+        text-decoration: underline;
+    }
+}
