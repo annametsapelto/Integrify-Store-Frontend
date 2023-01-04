@@ -1,9 +1,8 @@
 export interface CreateUserType {
-    id: number
     email: string
     password: string
     name: string
-    role: "admin" | "customer"
+    avatar: string
 }
 
 export interface UserType {
