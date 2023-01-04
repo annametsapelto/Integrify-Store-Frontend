@@ -19,9 +19,9 @@ const Cart = () => {
                 <ul className='cart_list'>
                     {cartItems.map(item => (
                     <li key={item.product.id} className="cart_list_item">
-                        <button onClick={() => dispatch(removeItemFromCart(item.product))}><RemoveIcon/></button>
+                        <button onClick={() => dispatch(removeItemFromCart(item))}><RemoveIcon/></button>
                         {item.amount} 
-                        <button onClick={() => dispatch(addItemToCart(item.product))}><AddIcon/></button> 
+                        <button onClick={() => dispatch(addItemToCart(item))}><AddIcon/></button> 
                           {item.product.title}  {item.product.price} €  
                         <button onClick={() => dispatch(removeItemFromCart(item))}>Remove item</button>
                     </li>

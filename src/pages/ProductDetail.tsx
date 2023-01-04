@@ -12,7 +12,7 @@ const ProductDetail = () => {
     const dispatch = useAppDispatch();
     const product = useAppSelector(state => state.productReducer).filter(prod => prod.id === Number(id))[0];
     let navigate = useNavigate();
-    const [pieces, setPieces] = useState(1);
+    const [amount, setAmount] = useState(1);
     const [productTitle, setProductTitle] = useState("");
     const [productPrice, setProductPrice] = useState(0);
     const [productDesc, setProductDesc] = useState("");
@@ -32,7 +32,7 @@ const ProductDetail = () => {
       }
 
       const addItems = () => {
-        dispatch(addItemToCart({pieces, product}));
+        dispatch(addItemToCart({amount, product}));
       }
 
       const handleModify = (event: React.FormEvent<HTMLButtonElement>) => {
@@ -58,9 +58,9 @@ const ProductDetail = () => {
               id="pieces" 
               name="pieces" 
               required 
-              value={pieces} 
+              value={amount} 
               placeholder="1" 
-              onChange={(event) => setPieces(parseInt(event.target.value))}>
+              onChange={(event) => setAmount(parseInt(event.target.value))}>
             </TextField>
             <button onClick={() => addItems()}>Add to cart</button>
           </div>
