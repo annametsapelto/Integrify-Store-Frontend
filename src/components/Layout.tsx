@@ -29,8 +29,7 @@ const Layout = ( ) => {
             <Route path='/*' element={<NotFound/>}></Route>
         </Routes>
         <Footer></Footer>
-        </BrowserRouter>
-    
+    </BrowserRouter>
     </>
     )
 }

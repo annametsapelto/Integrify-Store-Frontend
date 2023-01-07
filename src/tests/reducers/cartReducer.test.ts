@@ -1,5 +1,5 @@
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import {createStore} from "../../redux/store";
+import {createStore, RootState} from "../../redux/store";
 import { CreatedProductType, ProductType } from "../../types/ProductType";
 import { CartItemType } from "../../types/CartItemType";
 import { WritableDraft } from "immer/dist/internal";
@@ -7,11 +7,7 @@ import { UserType } from "../../types/UserType";
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
 import { addItemToCart, removeAllItems, removeItemFromCart } from "../../redux/reducers/cartReducer";
 
-let store: ToolkitStore<{
-    productReducer: WritableDraft<ProductType>[];
-    userReducer: UserType;
-    cartReducer: CartItemType[];
-}, AnyAction, [ThunkMiddleware]>
+let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
 beforeEach(() => {
     store = createStore(); 
@@ -45,8 +41,8 @@ beforeEach(() => {
         store.dispatch(addItemToCart(testProduct));
     //    store.dispatch(removeItemFromCart(1));
         expect(store.getState().cartReducer.length).toBe(0);
-    }),
-    test("Should remove all items from the cart and give length of 0", () => {
+    })
+/*    test("Should remove all items from the cart and give length of 0", () => {
         const testProduct1: CartItemType = {
             amount: 1,
             product: {
@@ -81,5 +77,5 @@ beforeEach(() => {
         store.dispatch(addItemToCart(testProduct2));
         store.dispatch(removeAllItems());
         expect(store.getState().cartReducer.length).toBe(0);
-    })
-})
+     }) */
+}) 

@@ -1,20 +1,28 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
 import { removeAllItems, removeItemFromCart, addItemToCart } from '../redux/reducers/cartReducer';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { CartItemType } from '../types/CartItemType';
 
 const Cart = () => {
     const dispatch = useAppDispatch();
-    const cartItems = useAppSelector(state => state.cartReducer);
+    const cartItems: CartItemType[] = useAppSelector(state => state.cartReducer);
+    const [cartIsEmpty, setCartIsEmpty] = useState(true);
 
     useEffect(() => {
-        console.log("Cart:" + cartItems[0].amount + cartItems[0].product)
-    }, [])
+        if (cartItems !== undefined || cartItems[0] !== undefined) {
+            setCartIsEmpty(false);
+            console.log(cartItems[0].amount)
+        } else {
+            setCartIsEmpty(true);
+        }
+    }, [cartItems])
+
     return(
         <div className='cart'>
             <h1>Your cart</h1>
-            {cartItems != undefined || cartItems[0] != undefined ?    
+            {!cartIsEmpty ?    
             <div> 
                 <ul className='cart_list'>
                     {cartItems.map(item => (

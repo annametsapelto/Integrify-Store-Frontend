@@ -9,6 +9,7 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [password2, setPassword2] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
     const [message, setMessage] = useState<string>("");
     const [msgStatus, setmsgStatus] = useState<"error" | "success">("success");
@@ -62,7 +63,8 @@ const Register = () => {
                     <InputLabel htmlFor='userEmail'>Your email</InputLabel>
                     <Input type="email" id="userEmail" name="userEmail" required value={email} onChange={(event) => setEmail(event.target.value)}></Input>
                     <InputLabel htmlFor='userPassword'>Your password</InputLabel>
-                    <Input type='string' id='userPassword' name='userPassword' required value={password} onChange={(event) => setPassword(event.target.value)}></Input>
+                    <Input type='password' id='userPassword' name='userPassword' required value={password} onChange={(event) => setPassword(event.target.value)}></Input>
+                    <Input type='password' id='userPassword2' name='userPassword2' required value={password2} onChange={(event) => setPassword2(event.target.value)}></Input>
                     <Box>
                         <Snackbar
                         open={open}

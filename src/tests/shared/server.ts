@@ -1,6 +1,34 @@
 import { rest, } from "msw";
 import { setupServer } from "msw/node";
+import jwt from 'jsonwebtoken';
 
+const users = [
+    {id: 1,
+    email: "email@email.com",
+    password: "word",
+    role: "customer",
+    name: "Name",
+    avatar: ""
+    },
+    {
+        id: 2,
+        email: "email2@email.com",
+        password: "word",
+        role: "customer",
+        name: "Name2",
+        avatar: ""  
+    },
+    {
+        id: 3,
+        email: "email3@email.com",
+        password: "word",
+        role: "customer",
+        name: "Name3",
+        avatar: ""  
+    }
+    
+
+]
 const handler = [
     rest.get("https://api.escuelajs.co/api/v1/products", (req, res, context) => {
         return res(
@@ -45,6 +73,36 @@ const handler = [
                 ]
             )
         )
+    }),
+    rest.get("https://api.escuelajs.co/api/v1/users", (req, res, context) => {
+        return res(
+            context.json(users)
+        )
+    }),
+    rest.post("https://api.escuelajs.co/api/v1/auth/login", async (req, res, context) => {
+        const {email, password} = await req.json();
+        const foundUser = users.find(user => user.email === email && user.password === password);
+        if(foundUser) {
+            const access_token = jwt.sign(foundUser, 'key');
+            return res(
+                context.json({
+                    access_token
+                })
+            )
+        } else {
+            return res(context.status(401, "Unauthorized"))
+        }
+    }),
+    rest.get("https://api.escuelajs.co/api/v1/auth/profile", async (req, res, context) => {
+        const access_token = req.headers.get("Authorization");
+        if (access_token) {
+            const foundUser = jwt.verify(access_token, "key")
+            return res(
+                context.json(foundUser)
+            )
+        } else {
+            return res(context.status(401, "Unauthorized"))
+        }
     })
 ]
 

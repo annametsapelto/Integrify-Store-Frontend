@@ -23,8 +23,8 @@ export const createProduct = createAsyncThunk (
         try {
             const response: AxiosResponse<ProductType, any>= await axios.post("https://api.escuelajs.co/api/v1/products", product);
             return response.data;
-        } catch (e){
-
+        } catch (e: any){
+            throw new Error(e.message)
         }
     }
 )

@@ -1,24 +1,24 @@
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { createProduct, deleteItem, fetchAllProducts, sortByNameDesc, sortByPriceAsc } from "../../redux/reducers/productReducer";
-import {createStore} from "../../redux/store";
+import {createStore, RootState} from "../../redux/store";
 import { CreatedProductType, ProductType } from "../../types/ProductType";
-import { UserType } from "../../types/UserType";
+import { UserReducerType, UserType } from "../../types/UserType";
 import server from "../shared/server";
 import { WritableDraft } from "immer/dist/internal";
 import { CartItemType } from "../../types/CartItemType";
 
-let store: ToolkitStore<{
-    productReducer: WritableDraft<ProductType>[];
-    userReducer: UserType;
-    cartReducer: CartItemType[];
-}, AnyAction, [ThunkMiddleware]>
+let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
 beforeAll(() => {
    server.listen(); 
 })
 beforeEach(() => {
    store = createStore(); 
+})
+
+afterAll(() => {
+    server.close();
 })
 
 describe("Test all actions", () => {

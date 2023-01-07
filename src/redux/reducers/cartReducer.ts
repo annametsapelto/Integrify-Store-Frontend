@@ -13,11 +13,11 @@ const cartSlice = createSlice({
             state.forEach(item => {
                 if (item.product.id === action.payload.product.id) {
                     itemFoundInCart = true;
-                    amountInCart = item.amount;
+                    amountInCart = amountInCart++;
                 }
             })
             let newItem: CartItemType = {
-                amount: amountInCart +1,
+                amount: amountInCart + action.payload.amount,
                 product: action.payload.product
             }
             if (itemFoundInCart) {
@@ -38,7 +38,7 @@ const cartSlice = createSlice({
             } else {
                 let newItem: CartItemType = {
                     product: action.payload.product,
-                    amount: amountInCart -1
+                    amount: amountInCart --
                 }
                 return state.map(item => item.product.id === action.payload.product.id ? newItem : item)
             }
