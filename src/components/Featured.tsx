@@ -16,8 +16,9 @@ const Featured = () => {
       
     useEffect(() => {
         if (products && products.length > 30) {
-            console.log("We have products" + products.length)
             getFeatured()
+            const array = JSON.parse(window.localStorage.featured)
+            setFeatured(array);
         }
     }, [])
 
@@ -26,12 +27,12 @@ const Featured = () => {
         tempArray.push(products[10]);
         tempArray.push(products[20]);
         tempArray.push(products[30]);
-        setFeatured(tempArray);
+        window.localStorage.setItem('featured', JSON.stringify(tempArray));
     }
 
     return (
         <div> 
-            {products && featured !== undefined ? 
+            {products && featured[0] !== undefined ? 
             <ul className='home_featured'>{
                 featured.map(product => (
                 <li key={product.id} >
@@ -43,10 +44,7 @@ const Featured = () => {
             </ul>
             :
             <p>Sorry, we could not find products to show.</p>
-        }
-
-
-            
+            }        
         </div>
     )
 }
