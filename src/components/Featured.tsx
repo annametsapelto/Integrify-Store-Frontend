@@ -9,16 +9,15 @@ const Featured = () => {
     const dispatch = useAppDispatch();
     const products = useAppSelector(state => state.productReducer);
     const [featured, setFeatured] = useState<ProductType[]>([]);
-    const [productsFound, setProductsFound] = useState(false);
     
     useEffect(() => {
         dispatch(fetchAllProducts());
       }, [])
       
     useEffect(() => {
-        getFeatured()
-        if (featured) {
-            setProductsFound(true);
+        if (products && products.length > 30) {
+            console.log("We have products" + products.length)
+            getFeatured()
         }
     }, [])
 
@@ -32,7 +31,7 @@ const Featured = () => {
 
     return (
         <div> 
-            {productsFound  || featured != undefined ? 
+            {products && featured !== undefined ? 
             <ul className='home_featured'>{
                 featured.map(product => (
                 <li key={product.id} >

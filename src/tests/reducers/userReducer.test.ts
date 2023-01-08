@@ -39,8 +39,6 @@ describe("Test userReducer", () => {
             password: "word",
         }
         await store.dispatch(authenticateCredentials(credentials));
-        const access_token = store.getState().userReducer.access_token as string;
-        await store.dispatch(loginUser(access_token))
         const currentUser = store.getState().userReducer.currentUser
         expect(currentUser).toBeDefined();
     })

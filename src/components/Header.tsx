@@ -5,7 +5,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Forestfield from '../images/Forestfield.png';
 import { Modal, InputLabel, TextField, Box, Alert, Snackbar } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { UserLogin } from "../redux/reducers/userReducer";
+import { loginUser, authenticateCredentials } from "../redux/reducers/userReducer";
 
 
 const Header = () => {
@@ -20,7 +20,7 @@ const Header = () => {
 
     const loginHandler = () => {
         const login = async () => {
-            await dispatch(UserLogin({email: email, password: password}))
+            await dispatch(authenticateCredentials({email: email, password: password}))
             .then((response) => {
                 console.log("logged in");
                 if ("error" in response) {

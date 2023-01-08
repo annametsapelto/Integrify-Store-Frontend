@@ -42,12 +42,6 @@ const Register = () => {
           }
     }
 
-    useEffect(() => {
-        if (user.name !== "Guest") {
-            setIsRegistered(true);
-        }
-    }, [])
-
     const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
     }

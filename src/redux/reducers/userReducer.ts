@@ -31,11 +31,12 @@ export const fetchAllUsers = createAsyncThunk(
 
 export const authenticateCredentials = createAsyncThunk(
     "authenticateCredentials",
-    async ({email, password}: CredentialsType) => {
+    async ({email, password}: CredentialsType, thunkAPI) => {
       try {
         const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", {email, password})
         const data: ReturnedCredentialsType = response.data;
-        return data;
+        const result = await thunkAPI.dispatch(loginUser(data.access_token));
+        return result.payload as UserType;
       } catch (e) {
         const error = e as AxiosError;
         return error
@@ -98,24 +99,28 @@ export const editUserServer = createAsyncThunk(
 const userSlice = createSlice({
     name: "userSlice",
     initialState,
-    reducers: {},
-    extraReducers: (build) => {
+    reducers: {
+      logoutUser: (state)  => {
+        state = initialState;
+      }
+    },
+     extraReducers: (build) => {
         build.addCase(createUser.fulfilled, (state, action) => {
             return action.payload;
-        }),
+        })
         build.addCase(authenticateCredentials.fulfilled, (state, action) => {
           if (action.payload instanceof AxiosError) {
             return state;
         } else {
-            state.access_token = action.payload.access_token;
-        }}),
+            state.currentUser = action.payload;
+        }})
         build.addCase(loginUser.fulfilled, (state, action) => {
           if (action.payload instanceof AxiosError) {
             return state;
         } else {
           state.currentUser = action.payload;
         }
-      }),
+      })
 /*        build.addCase(editUserServer.fulfilled, (state, action: PayloadAction<UserType>) => {
             return action.payload;
         }); */
