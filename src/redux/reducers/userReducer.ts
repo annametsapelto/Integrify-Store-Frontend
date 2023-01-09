@@ -107,7 +107,6 @@ const userSlice = createSlice({
     },
      extraReducers: (build) => {
         build.addCase(createUser.fulfilled, (state, action) => {
-          console.log("Succesfully created a user" + action.payload)
           return state;
         })
         build.addCase(authenticateCredentials.fulfilled, (state, action) => {

@@ -25,6 +25,7 @@ beforeEach(() => {
     test("Should remove one item from the cart and give length of 0", () => {
         const testProduct: CartItemType = {
             amount: 2,
+            total: 66,
             product: {
             id: 1,
             title: "Apple",

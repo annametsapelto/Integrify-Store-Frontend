@@ -1,48 +1,90 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItemType } from '../../types/CartItemType';
 
-const initialState: CartItemType[] = [];
+export const getFromLocalStorage = (): CartItemType[] => {
+    const cart = localStorage.getItem("cart");
+        if (cart) {
+            return JSON.parse(cart);
+        } else {
+            return []
+        }
+}
+
+const saveToLocalStorage = (data: CartItemType[]) => {
+    localStorage.setItem("cart", JSON.stringify(data));
+}
+
+const initialState: CartItemType[] = getFromLocalStorage();
 
 const cartSlice = createSlice({
     name: "cartSlice",
     initialState: initialState,
     reducers: {
         addItemToCart: (state, action: PayloadAction<CartItemType>) => {
-            let itemFoundInCart = false;
-            let amountInCart = 0;
-            state.forEach(item => {
-                if (item.product.id === action.payload.product.id) {
-                    itemFoundInCart = true;
-                    amountInCart = amountInCart++;
-                }
-            })
-            let newItem: CartItemType = {
-                amount: amountInCart + action.payload.amount,
-                product: action.payload.product
-            }
-            if (itemFoundInCart) {
-                return state.map(item => item.product.id === action.payload.product.id ? newItem : item);
-            } else {
-                return [...state, newItem]
-            }
-        },
+            const localStorageData = getFromLocalStorage();
+            const itemFoundInCart = localStorageData.find((item) => item.product.id === action.payload.product.id);
+                if (itemFoundInCart) {
+                    const cart = localStorageData.map((item) => {
+                        if (item.product.id === action.payload.product.id) {
+                          let totalQuantity = item.amount + action.payload.amount;
+                          let totalPrice = totalQuantity * item.product.price;
+                          return {
+                            ...itemFoundInCart,
+                            amount: totalQuantity,
+                            total: totalPrice,
+                          };
+                        } else {
+                          return item;
+                        }
+                      });
+                      saveToLocalStorage(cart);
+                      return (state = cart);
+                    } else {
+                      saveToLocalStorage([...localStorageData, action.payload]);
+                      return (state = [...localStorageData, action.payload]);
+                    }
+                  },
         removeItemFromCart: (state, action: PayloadAction<CartItemType>) => {
-            let amountInCart = 0;
-            state.forEach(item => {
-                if (item.product.id !== action.payload.product.id) {
-                    amountInCart = item.amount;
-                }
-            })
-            if (amountInCart === 1) {
-                return state.filter(item => item.product.id !== action.payload.product.id);
-            } else {
-                let newItem: CartItemType = {
-                    product: action.payload.product,
-                    amount: amountInCart --
-                }
-                return state.map(item => item.product.id === action.payload.product.id ? newItem : item)
-            }
+            const localStorageData = getFromLocalStorage();
+            const cart = localStorageData.filter((item) => {
+            return item.product.id !== action.payload.product.id;
+        });
+            saveToLocalStorage(cart);
+            return (state = cart);
         },
+        increaseQuantity: (state, action: PayloadAction<CartItemType>) => {
+            const localStorageData = getFromLocalStorage();
+            const item = localStorageData.find(
+              (item) => item.product.id === action.payload.product.id
+            );
+            if (item) {
+              item.amount++;
+              item.total = item.amount * item.product.price;
+              saveToLocalStorage(localStorageData);
+              return (state = localStorageData);
+            } else {
+              return state;
+            }
+          },
+          decreaseQuantity: (state, action: PayloadAction<CartItemType>) => {
+            const localStorageData = getFromLocalStorage();
+            const item = localStorageData.find(
+              (item) => item.product.id === action.payload.product.id
+            );
+            if (item) {
+              if (item.amount > 1) {
+                item.amount--;
+                item.total = item.amount * item.product.price;
+                saveToLocalStorage(localStorageData);
+                return (state = localStorageData);
+              } else {
+                item.amount = 1;
+                item.total = item.amount * item.product.price;
+                saveToLocalStorage(localStorageData);
+                return (state = localStorageData);
+              }
+            }
+          },
         removeAllItems: (state) => {
             state.length = 0;
         },
@@ -50,4 +92,4 @@ const cartSlice = createSlice({
 })
 
 export default cartSlice.reducer;
-export const { addItemToCart, removeAllItems, removeItemFromCart } = cartSlice.actions;
+export const { addItemToCart, removeAllItems, removeItemFromCart, decreaseQuantity, increaseQuantity } = cartSlice.actions;

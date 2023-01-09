@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { removeAllItems, removeItemFromCart, addItemToCart } from '../redux/reducers/cartReducer';
+import { removeAllItems, removeItemFromCart, decreaseQuantity, increaseQuantity } from '../redux/reducers/cartReducer';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { CartItemType } from '../types/CartItemType';
@@ -10,27 +10,20 @@ const Cart = () => {
     const cartItems: CartItemType[] = useAppSelector(state => state.cartReducer);
     const [cartIsEmpty, setCartIsEmpty] = useState(true);
 
-    useEffect(() => {
-        if (cartItems !== undefined || cartItems[0] !== undefined) {
-            setCartIsEmpty(false);
-            console.log(cartItems[0].amount)
-        } else {
-            setCartIsEmpty(true);
-        }
-    }, [cartItems])
-
     return(
         <div className='cart'>
             <h1>Your cart</h1>
-            {!cartIsEmpty ?    
+            {cartItems.length > 0 ?    
             <div> 
+                <p>Your cart has {cartItems.length} items</p>
                 <ul className='cart_list'>
                     {cartItems.map(item => (
                     <li key={item.product.id} className="cart_list_item">
-                        <button onClick={() => dispatch(removeItemFromCart(item))}><RemoveIcon/></button>
+                        <button onClick={() => dispatch(decreaseQuantity(item))} disabled={item.amount === 1}><RemoveIcon/></button>
                         {item.amount} 
-                        <button onClick={() => dispatch(addItemToCart(item))}><AddIcon/></button> 
+                        <button onClick={() => dispatch(increaseQuantity(item))} disabled={item.amount === 10}><AddIcon/></button> 
                           {item.product.title}  {item.product.price} €  
+                          Subtotal: {item.total} €
                         <button onClick={() => dispatch(removeItemFromCart(item))}>Remove item</button>
                     </li>
                 ))}

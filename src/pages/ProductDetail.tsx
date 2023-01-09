@@ -32,7 +32,8 @@ const ProductDetail = () => {
       }
 
       const addItems = () => {
-        dispatch(addItemToCart({amount, product}));
+        const total = amount * product.price;
+        dispatch(addItemToCart({amount, product, total}));
       }
 
       const handleModify = (event: React.FormEvent<HTMLButtonElement>) => {
