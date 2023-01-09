@@ -65,7 +65,6 @@ const Header = () => {
                             <p>Are you not registered yet?</p>
                             <button onClick={() => handleClose()}><NavLink to="register" className="login_link">Register</NavLink></button>
                         </div>
-                        
                     </Box>
                 </Modal>
             </div>

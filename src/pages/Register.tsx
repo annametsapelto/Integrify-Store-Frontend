@@ -4,12 +4,13 @@ import { Input, InputLabel, Alert, Snackbar, Box } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { createUser } from '../redux/reducers/userReducer';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { CreateUserType } from '../types/UserType';
+import { register } from 'ts-node';
+import { registration } from '../validation/registration';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const Register = () => {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [password2, setPassword2] = useState("");
     const [isRegistered, setIsRegistered] = useState(false);
     const [message, setMessage] = useState<string>("");
     const [msgStatus, setmsgStatus] = useState<"error" | "success">("success");
@@ -17,33 +18,24 @@ const Register = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const user = useAppSelector((state) => state.userReducer);
+    const {handleSubmit, register, watch, formState: {errors}} = useForm<CreateUserType>({
+        resolver: yupResolver(registration)
+    });
 
-    const createAccount = () => {
-        if (password.length < 5) {
-            setMessage("Password is too short!");
-            setmsgStatus("error");
-            setOpen(true);
-          } else {
-            dispatch(
-              createUser({
-                email: email,
-                password: password,
-                name: username,
-                avatar: ("https://picsum.photos/200"),
-              })
-            ).then((res) => {
-              if ("error" in res) {
-                setMessage("Data entered is invalid!");
-                setmsgStatus("error");
-                setOpen(true);
-              }
-              navigate("/");
-            });
-          }
-    }
+    const onSubmit: SubmitHandler<CreateUserType> = (data) => {
+            console.log(data);
+        }
 
-    const handleSubmit = (event: React.FormEvent<HTMLButtonElement>) => {
-        event.preventDefault();
+    const boxStyle = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
     }
 
     return(
@@ -51,29 +43,20 @@ const Register = () => {
             {!isRegistered ?
             <div>
                 <h1>Register here</h1>
-                <form>
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <InputLabel htmlFor='username'>Your username</InputLabel>
-                    <Input id="username" name="username" type="string" required value={username} onChange={(event) => setUsername(event.target.value)}></Input>
+                    <Input id="username" {...register("name")} type="string"></Input>
+                    <p>{errors.name?.message}</p>
                     <InputLabel htmlFor='userEmail'>Your email</InputLabel>
-                    <Input type="email" id="userEmail" name="userEmail" required value={email} onChange={(event) => setEmail(event.target.value)}></Input>
+                    <Input type="email" id="userEmail" {...register("email")}></Input>
+                    <p>{errors.email?.message}</p>
                     <InputLabel htmlFor='userPassword'>Your password</InputLabel>
-                    <Input type='password' id='userPassword' name='userPassword' required value={password} onChange={(event) => setPassword(event.target.value)}></Input>
-                    <Input type='password' id='userPassword2' name='userPassword2' required value={password2} onChange={(event) => setPassword2(event.target.value)}></Input>
-                    <Box>
-                        <Snackbar
-                        open={open}
-                        autoHideDuration={6000}
-                        onClose={() => setOpen(false)}>                  
-                        <Alert
-                            onClose={() => setOpen(false)}
-                            severity={msgStatus}
-                            sx={{ width: "100%" }}>
-                            {message}
-                        </Alert>
-                        </Snackbar>
-                    </Box>
-
-                    <button onSubmit={(event) => handleSubmit(event)}>Register</button>
+                    <Input type='password' id='userPassword' {...register("password")}></Input>
+                    <p>{errors.password?.message}</p>
+                    <InputLabel htmlFor='userPassword'>Enter password again</InputLabel>
+                    <Input type='password' id='userPassword2' {...register("password2")}></Input>
+                    <p>{errors.password2?.message}</p>
+                    <button type="submit">Register</button>
                 </form>
             </div>
             :

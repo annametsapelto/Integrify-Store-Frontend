@@ -35,7 +35,9 @@ export const authenticateCredentials = createAsyncThunk(
       try {
         const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", {email, password})
         const data: ReturnedCredentialsType = response.data;
+        console.log("We have gotten data ")
         const result = await thunkAPI.dispatch(loginUser(data.access_token));
+        console.log(result.payload as UserType)
         return result.payload as UserType;
       } catch (e) {
         const error = e as AxiosError;

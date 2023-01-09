@@ -9,6 +9,7 @@ import { TextField, InputLabel } from '@mui/material';
 
 const Products = () => {
     const [toBeSearched, setToBeSearched] = useState("");
+    const [numberOfProducts, setNumberOfProducts] = useState(0);
     const products = useAppSelector(state =>  {
         return state.productReducer.filter(item =>  {
          return item.title.toLowerCase().includes(toBeSearched.toLowerCase())}
@@ -17,6 +18,7 @@ const Products = () => {
   
     useEffect(() => {
       dispatch(fetchAllProducts());
+      setNumberOfProducts(products.length);
     }, [])
   
     const sortHandlerAsc = () => {
@@ -65,6 +67,9 @@ const Products = () => {
             <button onClick={sortHandlerDesc}>Sort Z to A</button>
             <button onClick={sortHandlerPriceAsc}>Sort by Cheapest</button>
             <button onClick={sortHandlerPriceDesc}>Sort by Most Expensive</button>
+          </div>
+          <div className='products_number'>
+            <p>There are {numberOfProducts} products available</p>
           </div>
           <ul className='products_list'>
             {products.map(product => 
