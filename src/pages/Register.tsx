@@ -23,7 +23,7 @@ const Register = () => {
     });
 
     const onSubmit: SubmitHandler<CreateUserType> = (data) => {
-            console.log(data);
+            dispatch(createUser(data))
         }
 
     const boxStyle = {

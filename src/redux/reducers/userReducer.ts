@@ -67,10 +67,9 @@ export const editUserServer = createAsyncThunk(
         "createUser",
         async (user: CreateUserType) => {
           try {
+            const newUser = {...user, avatar: "https://assets.website-files.com/61a3c3005e14bffd1c77eea9/62f663daea0370913f60c76e_profile-photo-hero.webp"}
             const response = await axios.post(
-              "https://api.escuelajs.co/api/v1/users/",
-              user
-            );
+              "https://api.escuelajs.co/api/v1/users/", newUser);
             return response.data;
           } catch (e) {
             throw new Error("Cannot add new user");
@@ -108,7 +107,8 @@ const userSlice = createSlice({
     },
      extraReducers: (build) => {
         build.addCase(createUser.fulfilled, (state, action) => {
-            return action.payload;
+          console.log("Succesfully created a user" + action.payload)
+          return state;
         })
         build.addCase(authenticateCredentials.fulfilled, (state, action) => {
           if (action.payload instanceof AxiosError) {
@@ -120,6 +120,7 @@ const userSlice = createSlice({
           if (action.payload instanceof AxiosError) {
             return state;
         } else {
+          console.log("Successfully logged in.")
           state.currentUser = action.payload;
         }
       })
