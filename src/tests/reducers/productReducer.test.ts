@@ -30,7 +30,7 @@ describe("Test all actions", () => {
         expect(store.getState().productReducer.length).toBe(3)
     })
     test("Should add a new product and make the list of products longer.", async () => {
-        const testProduct: CreatedProductType = {title: "Huge monitor", price: 445, description: "A huge monitor.", categoryId: 2, images: []};
+        const testProduct: CreatedProductType = {title: "Huge monitor", price: 445, description: "A huge monitor.", categoryId: 2, images: ""};
         await store.dispatch(createProduct(testProduct));
         expect(store.getState().productReducer.length).toBe(1);
         expect(store.getState().productReducer[0].title).toBe("Huge monitor");
@@ -40,9 +40,4 @@ describe("Test all actions", () => {
         store.dispatch(deleteItem(2));
         expect(store.getState().productReducer.length).toBe(2);
     })
-   /* test("Should sort by price asc", () => {
-        store.dispatch(sortByNameDesc);
-        console.log("sorted: " + store.getState().productReducer[0])
-        expect(store.getState().productReducer[0].title).toBe("Carving");
-    }) */
 })

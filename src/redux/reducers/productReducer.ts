@@ -8,8 +8,8 @@ export const fetchAllProducts = createAsyncThunk(
     "fetchAllProducts",
     async() => {
         try {
-            const dataAsJson = await fetch("https://api.escuelajs.co/api/v1/products");
-            const data: ProductType[] | Error = await dataAsJson.json();
+            const response = await axios.get("https://api.escuelajs.co/api/v1/products");
+            const data: ProductType[] | Error = response.data;
             return data;
         } catch (e: any) {
             throw new Error(e.message);
@@ -20,8 +20,14 @@ export const fetchAllProducts = createAsyncThunk(
 export const createProduct = createAsyncThunk (
     "createProduct",
     async (product: CreatedProductType) => {
+        console.log("Trying to create a product")
         try {
+            const imageResponse = await axios.post("https://api.escuelajs.co/api/v1/files/upload", product.images);
+            const location = imageResponse.data.location;
+            console.log("We got location");
+            product = {...product, images: location};
             const response: AxiosResponse<ProductType, any>= await axios.post("https://api.escuelajs.co/api/v1/products", product);
+            console.log("We created product");
             return response.data;
         } catch (e: any){
             throw new Error(e.message)

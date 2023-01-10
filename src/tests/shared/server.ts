@@ -103,6 +103,16 @@ const handler = [
         } else {
             return res(context.status(401, "Unauthorized"))
         }
+    }),
+    rest.post("https://api.escuelajs.co/api/v1/files/upload", async (req, res, context) => {
+        const file = await req.json();
+        res(
+            context.json({
+                originalname: "joigubo",
+                filename: "jbigyyu.png",
+                location: "https://api.escuelajs.co/api/v1/files/jbigyyu.png"
+            })
+        )
     })
 ]
 
