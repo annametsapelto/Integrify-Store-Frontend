@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { deleteItem, modifyProduct, getOneProduct, fetchAllProducts } from '../redux/reducers/productReducer';
+import { deleteItem, modifyProduct } from '../redux/reducers/productReducer';
 import { addItemToCart } from '../redux/reducers/cartReducer';
-import { CreatedProductType, ProductType } from '../types/ProductType';
+import { CreatedProductType, UpdateProductType } from '../types/ProductType';
 import { InputLabel, TextField } from '@mui/material';
 
 const ProductDetail = () => {
@@ -13,18 +13,19 @@ const ProductDetail = () => {
     const product = useAppSelector(state => state.productReducer).filter(prod => prod.id === Number(id))[0];
     let navigate = useNavigate();
     const [amount, setAmount] = useState(1);
-    const [productTitle, setProductTitle] = useState("");
-    const [productPrice, setProductPrice] = useState(0);
-    const [productDesc, setProductDesc] = useState("");
-    const [productCategory, setProductCategory] = useState(5);
-    const [productImages, setProductImages] = useState([]);
-    const [image1, setImage1] = useState("");
-    const [image2, setImage2] = useState("");
-    const [image3, setImage3] = useState("");
+    const [productTitle, setProductTitle] = useState(product.title);
+    const [productPrice, setProductPrice] = useState(product.price);
+    const [productDesc, setProductDesc] = useState(product.description);
+    const [productCategoryId, setProductCategoryId] = useState(product.category.id);
+    const [productImages, setProductImages] = useState<String[]>([]);
+    const [image1, setImage1] = useState(product.images[0]);
+    const [image2, setImage2] = useState(product.images[1]);
+    const [image3, setImage3] = useState(product.images[2]);
     const [showModify, setShowModify] = useState(false);
 
     const deleteItemHandler = (id: number) => {
         dispatch(deleteItem(id));
+        navigate("/products");
       }
     
       const modifyHandler = () => {
@@ -38,9 +39,14 @@ const ProductDetail = () => {
 
       const handleModify = (event: React.FormEvent<HTMLButtonElement>) => {
         event.preventDefault();
-            dispatch(modifyProduct({
-          ...product,
-          title: product.title + " new"}))
+        const newProduct: CreatedProductType = {
+          title: productTitle,
+          price: productPrice,
+          description: productDesc,
+          categoryId: productCategoryId,
+          images: [image1, image2, image3]
+        }
+            dispatch(modifyProduct({id: product.id, update: newProduct}))
       }
 
     return(
@@ -74,17 +80,17 @@ const ProductDetail = () => {
             <div>
             <form>
               <InputLabel htmlFor='productTitle'>Title</InputLabel>
-              <TextField type="string" id="productTitle" name="productTitle" value={productTitle} onChange={(event) => setProductTitle(event.target.value)}></TextField>
+              <TextField type="string" id="productTitle" name="productTitle" placeholder={product.title} value={productTitle} onChange={(event) => setProductTitle(event.target.value)}></TextField>
               <InputLabel htmlFor='productPrice'>Price</InputLabel>
-              <TextField type="number" id="productPrice" name='productPrice' value={productPrice} onChange={(event) => setProductPrice(parseInt(event.target.value))}></TextField>
+              <TextField type="number" id="productPrice" name='productPrice' placeholder={product.price.toString()} value={productPrice} onChange={(event) => setProductPrice(parseInt(event.target.value))}></TextField>
               <InputLabel htmlFor='productDesc'>Description</InputLabel>
-              <TextField type="string" id="productDesc" name='productDesc' value={productDesc} onChange={(event) => setProductDesc(event.target.value)}></TextField>
+              <TextField type="string" id="productDesc" name='productDesc' placeholder={product.description} value={productDesc} onChange={(event) => setProductDesc(event.target.value)}></TextField>
               <InputLabel htmlFor='productCategory'>Category Id (1-5)</InputLabel>
-              <TextField type="number" id="productCategory" name='productCategory' value={productCategory} onChange={(event) => setProductCategory(parseInt(event.target.value))}></TextField>
+              <TextField type="number" id="productCategory" name='productCategory' placeholder={product.category.toString()} value={productCategoryId} onChange={(event) => setProductCategoryId(parseInt(event.target.value))}></TextField>
               <InputLabel htmlFor='productImage1'>Images</InputLabel>
-              <TextField type="string" id="productImage1" name="productImage1" value={image1} onChange={(event) => setImage1(event.target.value)}></TextField>
-              <TextField type="string" id="productImage2" name="productImage2" value={image2} onChange={(event) => setImage2(event.target.value)}></TextField>
-              <TextField type="string" id="productImage3" name="productImage3" value={image3} onChange={(event) => setImage3(event.target.value)}></TextField>
+              <TextField type="string" id="productImage1" name="productImage1" placeholder={product.images[0]} value={image1} onChange={(event) => setImage1(event.target.value)}></TextField>
+              <TextField type="string" id="productImage2" name="productImage2" placeholder={product.images[0]} value={image2} onChange={(event) => setImage2(event.target.value)}></TextField>
+              <TextField type="string" id="productImage3" name="productImage3" placeholder={product.images[0]} value={image3} onChange={(event) => setImage3(event.target.value)}></TextField>
               <button type="submit" onSubmit={(event) => handleModify(event)}>Save changes</button>
             </form>
           </div>}

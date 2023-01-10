@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductType, CreatedProductType } from '../../types/ProductType';  
-import axios, { AxiosResponse } from 'axios';
+import { ProductType, CreatedProductType, UpdateProductType } from '../../types/ProductType';  
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const initialState: ProductType[]  = []
 
@@ -17,6 +17,18 @@ export const fetchAllProducts = createAsyncThunk(
     }
 )
 
+export const modifyProduct = createAsyncThunk(
+    "modifyproduct",
+    async ({id, update}: UpdateProductType) => {
+        try {
+        const response: AxiosResponse<ProductType, any> = await axios.put(`https://api.escuelajs.co/api/v1/products${id}`, update);
+        const data = response.data;
+        return data;
+    } catch (error: any) {
+        throw new Error(error.message)
+    }
+}
+)
 export const createProduct = createAsyncThunk (
     "createProduct",
     async (product: CreatedProductType) => {
@@ -40,6 +52,18 @@ export const createProduct = createAsyncThunk (
         }
     }
 )
+export const deleteItem = createAsyncThunk(
+    "deleteItem",
+    async (id: number) => {
+      try {
+        const response = await axios.delete(`https://api.escuelajs.co/api/v1/products/${id}`);
+        const data = await response.data;
+        return data;
+      } catch (error: any) {
+        console.log(error.response.status, error.response.statusText);
+      }
+    }
+  );
 
 const productSlice = createSlice({ 
     name: "productSlice",
@@ -57,27 +81,18 @@ const productSlice = createSlice({
         sortByPriceDesc: (state) => {
             state.sort((a, b) => b.price - a.price)
         },
-        deleteItem: (state, action: PayloadAction<number>) => {
-            return state.filter(item => item.id !== action.payload)
-        },
-        modifyProduct: (state, action: PayloadAction<ProductType>) => {
-            const foundItem = state.find(item => item.id === action.payload.id);
-            if (foundItem) {
-                return state.map(item => {
-                    if (item.id === action.payload.id) {
-                        item = action.payload;
-                    }
-                    return item
-                })
-            } else {
-                throw new Error("Item not found.");
-            }
-        },
         getOneProduct: (state, action: PayloadAction<number>) => {
             return state.filter(item => item.id === action.payload)
         }
         },
     extraReducers: (build) => {
+        build.addCase(deleteItem.fulfilled, (state, action) => {
+            if (action.payload instanceof AxiosError) {
+                return state;
+            } else {
+                return state.filter(item => item.id !== action.payload)
+            }
+        })
         build.addCase(fetchAllProducts.fulfilled, (state, action) => {
             if (action.payload && "message" in action.payload) {
                 return state; 
@@ -97,11 +112,22 @@ const productSlice = createSlice({
             } else {
                 return state;
             }
-            
+        })
+        build.addCase(modifyProduct.fulfilled, (state,action) => {
+            if (action.payload instanceof AxiosError) {
+                return state;
+            } else {
+                return state.map((product) => {
+                    if (product.id === action.payload?.id) {
+                        return action.payload;
+                    }
+                    return product;
+                })
+            }
         })
     }
 })
 
 const productReducer = productSlice.reducer
-export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, deleteItem, modifyProduct, getOneProduct } = productSlice.actions;
+export const { sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, getOneProduct } = productSlice.actions;
 export default productReducer

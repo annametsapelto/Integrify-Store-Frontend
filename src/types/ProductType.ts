@@ -16,3 +16,8 @@ export interface CreatedProductType {
     categoryId: number
     images: File[]|string[]
 }
+
+export interface UpdateProductType{
+    id: number
+    update: CreatedProductType
+}
