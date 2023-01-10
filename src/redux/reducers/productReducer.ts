@@ -18,7 +18,7 @@ export const fetchAllProducts = createAsyncThunk(
 )
 
 export const modifyProduct = createAsyncThunk(
-    "modifyproduct",
+    "modifyProduct",
     async ({id, update}: UpdateProductType) => {
         try {
         const response: AxiosResponse<ProductType, any> = await axios.put(`https://api.escuelajs.co/api/v1/products${id}`, update);
@@ -119,6 +119,7 @@ const productSlice = createSlice({
             } else {
                 return state.map((product) => {
                     if (product.id === action.payload?.id) {
+                        console.log(product.price);
                         return action.payload;
                     }
                     return product;
