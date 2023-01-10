@@ -5,12 +5,14 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
 import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct } from '../redux/reducers/productReducer';
 import { CreatedProductType, ProductType } from '../types/ProductType';
 import SearchIcon from '@mui/icons-material/Search';
-import { TextField, InputLabel } from '@mui/material';
+import { TextField, InputLabel, Modal, Box } from '@mui/material';
 import { fetchAllCategories } from '../redux/reducers/categoryReducer';
+import CreateProduct from '../components/CreateProduct';
 
 const Products = () => {
     const [toBeSearched, setToBeSearched] = useState("");
     const [numberOfProducts, setNumberOfProducts] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
     const products = useAppSelector(state =>  {
         return state.productReducer.filter(item =>  {
          return item.title.toLowerCase().includes(toBeSearched.toLowerCase())}
@@ -42,21 +44,23 @@ const Products = () => {
     const sortHandlerPriceDesc = () => {
       dispatch(sortByPriceDesc());
     }
-  
-    const createHandler = () => {
-      dispatch(createProduct(newProduct));
-    }
 
     const seeDetailsHandler = (product: ProductType) => {
         <Link to={String(product.id)}></Link>
     }
-  
-    const newProduct: CreatedProductType = {
-      title: "Created product",
-      description: "A great description",
-      price: 24,
-      categoryId: 2,
-      images: []
+
+    const handleClose = () => setOpenModal(false); 
+
+    const boxStyle = {
+        position: 'absolute' as 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 24,
+        p: 4,
     }
   
     return(
@@ -77,6 +81,14 @@ const Products = () => {
           <div className='products_number'>
             <p>There are {numberOfProducts} products available</p>
           </div>
+          <div>
+            <button onClick={() =>setOpenModal(!openModal)}>Create New Product</button>
+            <Modal open={openModal} onClose={handleClose}>
+              <Box sx={boxStyle}>
+                <CreateProduct></CreateProduct>
+              </Box>
+            </Modal>
+          </div>
           <ul className='products_list'>
             {products.map(product => 
               (<li className="products_list_item" key={product.id} >
@@ -90,9 +102,6 @@ const Products = () => {
                 </Link>
               </li>))}
           </ul>
-          <div className="products_create-new">
-            <button onClick={createHandler} >Create new product</button>
-          </div>
         </div>
       </div>
     )
