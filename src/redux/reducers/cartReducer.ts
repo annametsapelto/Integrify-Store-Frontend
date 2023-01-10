@@ -86,7 +86,10 @@ const cartSlice = createSlice({
             }
           },
         removeAllItems: (state) => {
-            state.length = 0;
+            const localStorageData = getFromLocalStorage();
+            localStorageData.length = 0;
+            saveToLocalStorage(localStorageData);
+            return (state = localStorageData);
         },
     }
 })

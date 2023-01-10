@@ -6,6 +6,7 @@ import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortBy
 import { CreatedProductType, ProductType } from '../types/ProductType';
 import SearchIcon from '@mui/icons-material/Search';
 import { TextField, InputLabel } from '@mui/material';
+import { fetchAllCategories } from '../redux/reducers/categoryReducer';
 
 const Products = () => {
     const [toBeSearched, setToBeSearched] = useState("");
@@ -15,11 +16,16 @@ const Products = () => {
          return item.title.toLowerCase().includes(toBeSearched.toLowerCase())}
         )})
     const dispatch = useAppDispatch();
+//    const categories = useAppSelector((state) => state.categories);
   
     useEffect(() => {
       dispatch(fetchAllProducts());
-      setNumberOfProducts(products.length);
+      dispatch(fetchAllCategories());
     }, [])
+
+    useEffect(() => {
+      setNumberOfProducts(products.length);
+    }, [products])
   
     const sortHandlerAsc = () => {
       dispatch(sortByNameAsc());
