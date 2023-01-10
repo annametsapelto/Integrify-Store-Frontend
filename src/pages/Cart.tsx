@@ -6,9 +6,13 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import { CartItemType } from '../types/CartItemType';
 
 const Cart = () => {
+    const [cartTotal, setCartTotal] = useState(0);
     const dispatch = useAppDispatch();
     const cartItems: CartItemType[] = useAppSelector(state => state.cartReducer);
-    const [cartIsEmpty, setCartIsEmpty] = useState(true);
+
+    useEffect(() => {
+        setCartTotal(cartItems.reduce((acc, items) => acc + items.total, 0))
+    }, [cartItems])
 
     return(
         <div className='cart'>
@@ -29,6 +33,10 @@ const Cart = () => {
                 ))}
                 </ul> 
                 <button onClick={() => dispatch(removeAllItems())}>Remove all items</button>
+                <div>
+                    <h2>Total: {cartTotal} €</h2>
+                    <button>Place order</button>
+                </div>
             </div>        
             :
             <div><p>Your cart is empty.</p></div>}
