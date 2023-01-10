@@ -22,10 +22,16 @@ export const createProduct = createAsyncThunk (
     async (product: CreatedProductType) => {
         console.log("Trying to create a product")
         try {
-            const imageResponse = await axios.post("https://api.escuelajs.co/api/v1/files/upload", product.images);
-            const location = imageResponse.data.location;
-            console.log("We got location");
-            product = {...product, images: location};
+            const productImages = ["https://api.lorem.space/image?w=150&h=180",
+            "https://api.lorem.space/image?w=150&h=180",
+            "https://api.lorem.space/image?w=150&h=180"];
+            product = {
+                title: product.title, 
+                price: product.price, 
+                description:product.description, 
+                categoryId: product.categoryId, 
+                images: 
+                productImages}
             const response: AxiosResponse<ProductType, any>= await axios.post("https://api.escuelajs.co/api/v1/products", product);
             console.log("We created product");
             return response.data;

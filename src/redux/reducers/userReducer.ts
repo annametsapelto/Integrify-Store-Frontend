@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { UserType, CreateUserType, UserReducerType, CredentialsType, ReturnedCredentialsType } from '../../types/UserType';
 

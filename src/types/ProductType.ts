@@ -14,5 +14,5 @@ export interface CreatedProductType {
     description: string
     price: number
     categoryId: number
-    images: File|string
+    images: File[]|string[]
 }

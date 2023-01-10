@@ -33,8 +33,6 @@ const CreateProduct = () => {
                 <InputLabel htmlFor="category">Categorynumber</InputLabel>
                 <TextField id="category" type="number" {...register ("categoryId")}></TextField>
                 <p>{errors.categoryId?.message}</p>
-                <InputLabel htmlFor="image"></InputLabel>
-                <TextField id="image" type="file" {...register ("images")}></TextField>
                 <button type="submit">Create</button>
             </form>
         </div>
