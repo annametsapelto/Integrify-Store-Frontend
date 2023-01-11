@@ -4,7 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Forestfield from '../images/Forestfield.png';
 import { Modal, InputLabel, TextField, Box } from '@mui/material';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { useAppDispatch } from '../hooks/reduxHook';
 import { authenticateCredentials } from "../redux/reducers/userReducer";
 
 

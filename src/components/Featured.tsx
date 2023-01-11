@@ -27,7 +27,7 @@ const Featured = () => {
             const array = JSON.parse(window.localStorage.featured)
             setFeatured(array);
         }
-    }, [getFeatured, products])
+    }, [products])
 
     return (
         <div> 
@@ -36,7 +36,7 @@ const Featured = () => {
                 featured.map(product => (
                 <li key={product.id} >
                     <Link 
-                    to={`/products/`+ String(product.id)}><img src={product.images[0]}></img><p>{product.title}  {product.price} € </p>
+                    to={`/products/`+ String(product.id)}><img src={product.images[0]} alt={product.title}></img><p>{product.title}  {product.price} € </p>
                     <button>See details</button>
                     </Link>
                 </li>))}
