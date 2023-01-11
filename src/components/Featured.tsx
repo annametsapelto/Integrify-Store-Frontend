@@ -27,7 +27,7 @@ const Featured = () => {
             const array = JSON.parse(window.localStorage.featured)
             setFeatured(array);
         }
-    }, [products])
+    }, [])
 
     return (
         <div> 
