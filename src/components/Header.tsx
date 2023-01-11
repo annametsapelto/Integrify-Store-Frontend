@@ -12,9 +12,6 @@ const Header = () => {
     const [openModal, setOpenModal] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [open, setOpen] = useState<boolean>(false);
-    const [message, setMessage] = useState<string>("");
-    const user = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -24,8 +21,7 @@ const Header = () => {
             .then((response) => {
                 console.log("logged in");
                 if ("error" in response) {
-                    setMessage("Error! Your email or password are not correct.");
-                    setOpen(true);
+                    throw new Error("Login failed")
                 }
                 navigate("/");
             })

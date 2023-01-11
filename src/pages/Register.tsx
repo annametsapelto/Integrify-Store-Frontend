@@ -1,8 +1,6 @@
-import { useState } from 'react';
-
 import { Input, InputLabel } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
+import { useAppDispatch } from '../hooks/reduxHook';
 import { createUser } from '../redux/reducers/userReducer';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateUserType } from '../types/UserType';
@@ -10,11 +8,9 @@ import { registration } from '../validation/registration';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 const Register = () => {
-    const [isRegistered, setIsRegistered] = useState(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const user = useAppSelector((state) => state.userReducer);
-    const {handleSubmit, register, watch, formState: {errors}} = useForm<CreateUserType>({
+    const {handleSubmit, register, formState: {errors}} = useForm<CreateUserType>({
         resolver: yupResolver(registration)
     });
 
@@ -25,7 +21,6 @@ const Register = () => {
 
     return(
         <div className='register'>
-            {!isRegistered ?
             <div>
                 <h1>Register here</h1>
                 <form onSubmit={handleSubmit(onSubmit)}>
@@ -44,12 +39,10 @@ const Register = () => {
                     <button type="submit">Register</button>
                 </form>
             </div>
-            :
             <div>
                 <h1>You are already registered</h1>
                 <Link to="/">Return to home page.</Link>
             </div>
-            }
         </div>
     )
 }

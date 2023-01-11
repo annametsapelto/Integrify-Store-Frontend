@@ -8,7 +8,7 @@ import { createProduct } from "../redux/reducers/productReducer";
 
 const CreateProduct = () => {
     const dispatch = useAppDispatch();
-    const {handleSubmit, register, watch, formState: {errors}} = useForm<CreatedProductType>({
+    const {handleSubmit, register, formState: {errors}} = useForm<CreatedProductType>({
         resolver: yupResolver(newProduct)
     });
 

@@ -9,18 +9,6 @@ const Featured = () => {
     const dispatch = useAppDispatch();
     const products = useAppSelector(state => state.productReducer);
     const [featured, setFeatured] = useState<ProductType[]>([]);
-    
-    useEffect(() => {
-        dispatch(fetchAllProducts());
-      }, [])
-      
-    useEffect(() => {
-        if (products && products.length > 30) {
-            getFeatured()
-            const array = JSON.parse(window.localStorage.featured)
-            setFeatured(array);
-        }
-    }, [])
 
     const getFeatured = () => {
         let tempArray: ProductType[] = [];
@@ -28,7 +16,18 @@ const Featured = () => {
         tempArray.push(products[20]);
         tempArray.push(products[30]);
         window.localStorage.setItem('featured', JSON.stringify(tempArray));
-    }
+    }    
+    useEffect(() => {
+        dispatch(fetchAllProducts());
+      }, [dispatch])
+      
+    useEffect(() => {
+        if (products && products.length > 30) {
+            getFeatured()
+            const array = JSON.parse(window.localStorage.featured)
+            setFeatured(array);
+        }
+    }, [getFeatured, products])
 
     return (
         <div> 

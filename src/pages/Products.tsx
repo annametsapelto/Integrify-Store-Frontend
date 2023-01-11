@@ -22,7 +22,7 @@ const Products = () => {
     useEffect(() => {
       dispatch(fetchAllProducts());
       dispatch(fetchAllCategories());
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
       setNumberOfProducts(products.length);
