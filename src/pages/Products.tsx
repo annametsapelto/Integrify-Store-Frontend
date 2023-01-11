@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
-import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc, createProduct } from '../redux/reducers/productReducer';
-import { CreatedProductType, ProductType } from '../types/ProductType';
+import { fetchAllProducts, sortByNameAsc, sortByNameDesc, sortByPriceAsc, sortByPriceDesc } from '../redux/reducers/productReducer';
+import { ProductType } from '../types/ProductType';
 import SearchIcon from '@mui/icons-material/Search';
 import { TextField, InputLabel, Modal, Box } from '@mui/material';
 import { fetchAllCategories } from '../redux/reducers/categoryReducer';
@@ -18,7 +18,6 @@ const Products = () => {
          return item.title.toLowerCase().includes(toBeSearched.toLowerCase())}
         )})
     const dispatch = useAppDispatch();
-//    const categories = useAppSelector((state) => state.categories);
   
     useEffect(() => {
       dispatch(fetchAllProducts());

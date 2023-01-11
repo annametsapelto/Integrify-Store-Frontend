@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
-import { Input, InputLabel, Alert, Snackbar, Box } from '@mui/material';
+import { Input, InputLabel } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
 import { createUser } from '../redux/reducers/userReducer';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { CreateUserType } from '../types/UserType';
-import { register } from 'ts-node';
 import { registration } from '../validation/registration';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -20,9 +19,9 @@ const Register = () => {
     });
 
     const onSubmit: SubmitHandler<CreateUserType> = (data) => {
-            dispatch(createUser(data))
-            navigate("");
-        }
+        dispatch(createUser(data))
+        navigate("");
+    }
 
     return(
         <div className='register'>

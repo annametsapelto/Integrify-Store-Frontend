@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { CartItemType } from '../../types/CartItemType';
 
 export const getFromLocalStorage = (): CartItemType[] => {
-    const cart = localStorage.getItem("cart");
-        if (cart) {
-            return JSON.parse(cart);
-        } else {
-            return []
-        }
-}
+  const cart = localStorage.getItem("cart");
+    if (cart) {
+      return JSON.parse(cart);
+    } else {
+      return []
+    }
+  }
 
 const saveToLocalStorage = (data: CartItemType[]) => {
     localStorage.setItem("cart", JSON.stringify(data));

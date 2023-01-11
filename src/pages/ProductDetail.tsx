@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook'
 import { deleteItem, modifyProduct } from '../redux/reducers/productReducer';
 import { addItemToCart } from '../redux/reducers/cartReducer';
-import { CreatedProductType, UpdateProductType } from '../types/ProductType';
+import { CreatedProductType } from '../types/ProductType';
 import { InputLabel, TextField } from '@mui/material';
 
 const ProductDetail = () => {
@@ -17,7 +17,6 @@ const ProductDetail = () => {
     const [productPrice, setProductPrice] = useState(product.price);
     const [productDesc, setProductDesc] = useState(product.description);
     const [productCategoryId, setProductCategoryId] = useState(product.category.id);
-    const [productImages, setProductImages] = useState<String[]>([]);
     const [image1, setImage1] = useState(product.images[0]);
     const [image2, setImage2] = useState(product.images[1]);
     const [image3, setImage3] = useState(product.images[2]);
@@ -25,7 +24,7 @@ const ProductDetail = () => {
 
     const deleteItemHandler = (id: number) => {
         dispatch(deleteItem(id));
-        navigate("/products");
+        navigate(-1);
       }
     
       const modifyHandler = () => {
@@ -46,6 +45,7 @@ const ProductDetail = () => {
           categoryId: productCategoryId,
           images: [image1, image2, image3]
         }
+        console.log(newProduct.title)
             dispatch(modifyProduct({id: product.id, update: newProduct}))
       }
 
@@ -94,7 +94,6 @@ const ProductDetail = () => {
               <button type="submit" onSubmit={(event) => handleModify(event)}>Save changes</button>
             </form>
           </div>}
-
       </div>
     )
 }

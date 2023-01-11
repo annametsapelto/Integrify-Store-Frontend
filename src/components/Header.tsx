@@ -3,9 +3,9 @@ import Navigation from "./Navigation";
 import { NavLink, useNavigate } from 'react-router-dom';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Forestfield from '../images/Forestfield.png';
-import { Modal, InputLabel, TextField, Box, Alert, Snackbar } from '@mui/material';
+import { Modal, InputLabel, TextField, Box } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
-import { loginUser, authenticateCredentials } from "../redux/reducers/userReducer";
+import { authenticateCredentials } from "../redux/reducers/userReducer";
 
 
 const Header = () => {
@@ -68,7 +68,6 @@ const Header = () => {
                     </Box>
                 </Modal>
             </div>
-
         </header>
     )
 }

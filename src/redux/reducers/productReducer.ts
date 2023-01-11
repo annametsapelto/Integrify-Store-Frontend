@@ -21,13 +21,13 @@ export const modifyProduct = createAsyncThunk(
     "modifyProduct",
     async ({id, update}: UpdateProductType) => {
         try {
-        const response: AxiosResponse<ProductType, any> = await axios.put(`https://api.escuelajs.co/api/v1/products${id}`, update);
-        const data = response.data;
-        return data;
-    } catch (error: any) {
-        throw new Error(error.message)
+            const response: AxiosResponse<ProductType, any> = await axios.put(`https://api.escuelajs.co/api/v1/products${id}`, update);
+            const data = response.data;
+            return data;
+        } catch (error: any) {
+            throw new Error(error.message)
+        }
     }
-}
 )
 export const createProduct = createAsyncThunk (
     "createProduct",
@@ -51,7 +51,8 @@ export const createProduct = createAsyncThunk (
             throw new Error(e.message)
         }
     }
-)
+) 
+
 export const deleteItem = createAsyncThunk(
     "deleteItem",
     async (id: number) => {

@@ -123,9 +123,6 @@ const userSlice = createSlice({
           state.currentUser = action.payload;
         }
       })
-/*        build.addCase(editUserServer.fulfilled, (state, action: PayloadAction<UserType>) => {
-            return action.payload;
-        }); */
         build.addCase(fetchAllUsers.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
                 return state;

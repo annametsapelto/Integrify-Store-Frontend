@@ -12,7 +12,6 @@ const About = () => {
                 <img src={Cats} alt="Two orange cats"></img>
                 <p>The assistants who were crucial in making this site</p>
             </div>
-
         </div>
     )
 }
