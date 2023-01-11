@@ -17,4 +17,4 @@ MaterialUI
 
 ## Getting Started
 The project can be cloned from Github using command git clone .
-The page will be live soon.
+The page is live at https://forestfields.netlify.app/
