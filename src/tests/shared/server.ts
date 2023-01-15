@@ -113,8 +113,28 @@ const handler = [
                 location: "https://api.escuelajs.co/api/v1/files/jbigyyu.png"
             })
         )
-    })
-]
+    }),
+    rest.get("https://api.escuelajs.co/api/v1/categories", async (req, res, context) => {
+        return res(
+            context.json(
+                [  {
+                    "id": 1,
+                    "name": "Clothes",
+                    "image": "https://api.lorem.space/image/fashion?w=640&h=480&r=4278"
+                  },
+                  {
+                    "id": 2,
+                    "name": "Food",
+                    "image": "https://api.lorem.space/image/fashion?w=640&h=480&r=4278"
+                  },
+                  {
+                    "id": 3,
+                    "name": "Furniture",
+                    "image": "https://api.lorem.space/image/fashion?w=640&h=480&r=4278"
+                  }
+                ]
+            )
+        )})]
 
 const server = setupServer(...handler);
 export default server;

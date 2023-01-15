@@ -3,10 +3,7 @@ import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import { createProduct, deleteItem, fetchAllProducts, sortByNameDesc, sortByPriceAsc } from "../../redux/reducers/productReducer";
 import {createStore, RootState} from "../../redux/store";
 import { CreatedProductType, ProductType } from "../../types/ProductType";
-import { UserReducerType, UserType } from "../../types/UserType";
 import server from "../shared/server";
-import { WritableDraft } from "immer/dist/internal";
-import { CartItemType } from "../../types/CartItemType";
 
 let store: ToolkitStore<RootState, AnyAction, [ThunkMiddleware<RootState, AnyAction, undefined>]>
 
