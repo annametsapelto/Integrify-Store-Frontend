@@ -59,6 +59,7 @@ const ProductDetail = () => {
         Return to products
       </button>
       <h1>{product.title}</h1>
+      <p><b>{product.category.name}</b></p>
       <p className="product_desc">{product.description}</p>
       <p className="product_price">Our price: {product.price} €</p>
       <div>

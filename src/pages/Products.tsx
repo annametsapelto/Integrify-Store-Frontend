@@ -12,8 +12,8 @@ import {
 import { ProductType } from "../types/ProductType";
 import SearchIcon from "@mui/icons-material/Search";
 import { TextField, InputLabel, Modal, Box } from "@mui/material";
-import { fetchAllCategories } from "../redux/reducers/categoryReducer";
 import CreateProduct from "../components/CreateProduct";
+import Categories from "../components/Categories";
 
 const Products = () => {
   const [toBeSearched, setToBeSearched] = useState("");
@@ -28,7 +28,6 @@ const Products = () => {
 
   useEffect(() => {
     dispatch(fetchAllProducts());
-    dispatch(fetchAllCategories());
   }, [dispatch]);
 
   useEffect(() => {
@@ -93,6 +92,9 @@ const Products = () => {
         </div>
         <div className="products_number">
           <p>There are {numberOfProducts} products available</p>
+        </div>
+        <div>
+          <Categories></Categories>
         </div>
         <div>
           <button onClick={() => setOpenModal(!openModal)}>
