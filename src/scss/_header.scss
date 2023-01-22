@@ -90,3 +90,17 @@ header {
         text-decoration: underline;
     }
 }
+
+.header_cart {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    text-decoration: none;
+
+    p {
+        color: white;
+    }
+    &:hover {
+        color: $light-green;
+    }
+}

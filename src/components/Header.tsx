@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAppDispatch } from "../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { NavLink, useNavigate } from "react-router-dom";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -14,6 +14,8 @@ const Header = () => {
   const [password, setPassword] = useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const cart = useAppSelector((state) => state.cartReducer);
+  const cartItemsAmount = cart.length;
 
   const loginHandler = () => {
     const login = async () => {
@@ -50,6 +52,7 @@ const Header = () => {
         <Navigation></Navigation>
         <NavLink to="/cart" className="header_cart">
           <ShoppingCartIcon />
+          {cartItemsAmount > 0 && <p>{cartItemsAmount}</p>}
         </NavLink>
         <p className="header_login" onClick={() => setOpenModal(!openModal)}>
           Login
