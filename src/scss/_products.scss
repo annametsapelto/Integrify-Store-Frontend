@@ -46,6 +46,12 @@
     border: 1px solid $shadow-green;
     box-shadow: 1px 1px 1px $shadow-green;
     
+    &:hover {
+        transform: translateY(-0.2em);
+    }
+    a:link {
+        text-decoration: none;
+    }
     img {
         border-radius: 10px;
         margin: 0.5em;
@@ -57,16 +63,18 @@
 
     }
     .products_list_texts {
+        font-size: larger;
         display:flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         
-        .products_list_title p {
-            margin-bottom: 1em;
+        .products_list_title p { 
+            margin-bottom: 0.5em;
         }
 
         button {
+            text-decoration: none;
             height: 3.5em;
             padding-left: 1em;
             padding-right: 1em;

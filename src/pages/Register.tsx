@@ -27,7 +27,7 @@ const Register = () => {
   return (
     <div className="register">
       <div>
-      <Link to="/">Return to home page.</Link>
+        <Link to="/">Return to home page.</Link>
         <h1>Register here</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputLabel htmlFor="username">Your username</InputLabel>
@@ -53,12 +53,12 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
       </div>
-      { user &&
+      {user && (
         <div>
-        <h1>You are already registered</h1>
-        <Link to="/">Return to home page.</Link>
-      </div>}
-
+          <h1>You are already registered</h1>
+          <Link to="/">Return to home page.</Link>
+        </div>
+      )}
     </div>
   );
 };
