@@ -2,17 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { UserType, CreateUserType, UserReducerType, CredentialsType, ReturnedCredentialsType } from '../../types/UserType';
 
-const initialState: UserReducerType = {
-    userList: [],
-    currentUser: {
-        id: 0,
-        name: "Guest",
-        role: "customer",
-        email: "",
-        password: "",
-        avatar: ""
-    }
-}
+const initialState: UserType = null as unknown as UserType;
 
 export const fetchAllUsers = createAsyncThunk(
     "fetchAllUsers",
@@ -35,48 +25,15 @@ export const authenticateCredentials = createAsyncThunk(
       try {
         const response = await axios.post("https://api.escuelajs.co/api/v1/auth/login", {email, password})
         const data: ReturnedCredentialsType = response.data;
-        console.log("We have gotten data ")
+        localStorage.setItem("access_token", JSON.stringify(data.access_token));
         const result = await thunkAPI.dispatch(loginUser(data.access_token));
-        console.log(result.payload as UserType)
         return result.payload as UserType;
-      } catch (e) {
+      } catch (e: any) {
         const error = e as AxiosError;
-        return error
+        return error;
       }
     }
 )
-export const editUserServer = createAsyncThunk(
-    "editUserServer",
-    async (user: UserType) => {
-        try {
-            const response = await axios.put("https://api.escuelajs.co/api/v1/users/" + user.id,
-            {
-              email: user.email,
-              password: user.password,
-              name: user.name,
-            }
-          );
-          return response.data;
-        } catch (e) {
-          throw new Error("Could not edit user");
-        }
-      }
-    );
-
-    export const createUser = createAsyncThunk(
-        "createUser",
-        async (user: CreateUserType) => {
-          try {
-            const newUser = {...user, avatar: "https://assets.website-files.com/61a3c3005e14bffd1c77eea9/62f663daea0370913f60c76e_profile-photo-hero.webp"}
-            const response = await axios.post(
-              "https://api.escuelajs.co/api/v1/users/", newUser);
-            return response.data;
-          } catch (e) {
-            throw new Error("Cannot add new user");
-          }
-        }
-      );
-      
       export const loginUser = createAsyncThunk(
         "loginUser",
         async (access_token: string) => {
@@ -96,13 +53,28 @@ export const editUserServer = createAsyncThunk(
         }
       )
 
-
+    export const createUser = createAsyncThunk(
+        "createUser",
+        async (user: CreateUserType) => {
+          try {
+            const newUser = {...user, avatar: "https://assets.website-files.com/61a3c3005e14bffd1c77eea9/62f663daea0370913f60c76e_profile-photo-hero.webp"}
+            const response = await axios.post(
+              "https://api.escuelajs.co/api/v1/users/", newUser);
+            return response.data;
+          } catch (e) {
+            throw new Error("Cannot add new user");
+          }
+        }
+      );
+      
 const userSlice = createSlice({
     name: "userSlice",
     initialState,
     reducers: {
       logoutUser: (state)  => {
         state = initialState;
+        localStorage.removeItem("access_token");
+        localStorage.removeItem('user');
       }
     },
      extraReducers: (build) => {
@@ -113,21 +85,22 @@ const userSlice = createSlice({
           if (action.payload instanceof AxiosError) {
             return state;
         } else {
-            state.currentUser = action.payload;
+            localStorage.setItem('user', JSON.stringify(action.payload));
+            console.log("We have a user")
         }})
+        build.addCase(authenticateCredentials.rejected, (state, action) => {
+          console.log("Error fetching data")
+          return state
+      })
         build.addCase(loginUser.fulfilled, (state, action) => {
           if (action.payload instanceof AxiosError) {
             return state;
-        } else {
-          console.log("Successfully logged in.")
-          state.currentUser = action.payload;
         }
       })
         build.addCase(fetchAllUsers.fulfilled, (state, action) => {
             if (action.payload instanceof AxiosError) {
                 return state;
             } else {
-                state.userList = action.payload;
             }
         })
     }

@@ -25,21 +25,5 @@ afterAll(() => {
 describe("Test userReducer", () => {
     test("Should return initial state", () => {
         const initialState = store.getState().userReducer;
-        expect(initialState.userList.length).toBe(0);
-        expect(initialState.currentUser.name).toBe("Guest");
-    }),
-    test("Should fetch the user list", async() => {
-        await store.dispatch(fetchAllUsers());
-        const state = store.getState().userReducer;
-        expect(state.userList.length).toBe(3)
-    }),
-    test("Should login user with right credentials", async () => {
-        const credentials = {    
-            email: "email@email.com",
-            password: "word",
-        }
-        await store.dispatch(authenticateCredentials(credentials));
-        const currentUser = store.getState().userReducer.currentUser
-        expect(currentUser).toBeDefined();
-    })
-})
+        expect(initialState).toBe(null)
+})})

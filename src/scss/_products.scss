@@ -88,16 +88,19 @@
 }
 
 .products_create-new button {
-    font-size: large;
-    height: 4em;
-    padding: 10px;
-    background-color: $light-green;
-    border-color: $mid-green;
+    height: 3.5em;
+    padding-left: 1em;
+    padding-right: 1em;
+    color: white;
+    background-color: $mid-green;
+    border-color: $dark-green;
     border-radius: 10px;
     box-shadow: 1px 1px 1px $shadow-green;
+    margin-bottom: 2em;
+    font-size: medium;
 
     &:hover {
-        background-color: $mid-green;
+        background-color: $dark-green;
         color: $light-green;
         cursor: pointer;
     }

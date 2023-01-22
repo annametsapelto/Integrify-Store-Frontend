@@ -7,11 +7,11 @@ export interface CreateUserType {
 }
 
 export interface UserType {
-    id: number,
+    id: number,    
+    email: string,    
+    password: string,
     name: string,
     role: Role,
-    email: string,
-    password: string,
     avatar: string 
 }
 
@@ -22,9 +22,14 @@ export interface EditUserType {
 }
 
 export interface UserReducerType {
-    userList: UserType[]
-    currentUser: UserType
-    access_token?: string
+    avatar: string,
+    creationAt: string,
+    email: string,
+    id: number
+    name: string,
+    password: string,
+    role: string,
+    updatedAt: string,
 }
 
 export interface CredentialsType {
@@ -34,6 +39,7 @@ export interface CredentialsType {
 
 export interface ReturnedCredentialsType {
     access_token: string
+    refresh_token: string
 }
 
 

@@ -94,9 +94,8 @@ const Products = () => {
           <p>There are {numberOfProducts} products available</p>
         </div>
         <div>
-          <Categories></Categories>
         </div>
-        <div>
+        <div className="products_create-new">
           <button onClick={() => setOpenModal(!openModal)}>
             Create New Product
           </button>

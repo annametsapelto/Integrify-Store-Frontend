@@ -22,7 +22,7 @@ const CreateProduct = () => {
   };
 
   return (
-    <div>
+    <div className="products_create-new">
       <h1>Create New Product</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputLabel htmlFor="title">Product title</InputLabel>
@@ -47,7 +47,7 @@ const CreateProduct = () => {
           {...register("categoryId")}
         ></TextField>
         <p>{errors.categoryId?.message}</p>
-        <button type="submit">Create</button>
+        <button type="submit" >Create</button>
       </form>
     </div>
   );

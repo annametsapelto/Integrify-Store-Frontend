@@ -20,7 +20,6 @@ const Header = () => {
       await dispatch(
         authenticateCredentials({ email: email, password: password })
       ).then((response) => {
-        console.log("logged in");
         if ("error" in response) {
           throw new Error("Login failed");
         }
@@ -67,7 +66,7 @@ const Header = () => {
               ></TextField>
               <InputLabel htmlFor="password">Your password</InputLabel>
               <TextField
-                type="string"
+                type="password"
                 value={password}
                 id="password"
                 onChange={(event) => setPassword(event.target.value)}

@@ -1,6 +1,6 @@
 import { Input, InputLabel } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../hooks/reduxHook";
+import { useAppDispatch, useAppSelector } from "../hooks/reduxHook";
 import { createUser } from "../redux/reducers/userReducer";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CreateUserType } from "../types/UserType";
@@ -10,6 +10,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 const Register = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const user = useAppSelector((state) => state.userReducer);
   const {
     handleSubmit,
     register,
@@ -26,6 +27,7 @@ const Register = () => {
   return (
     <div className="register">
       <div>
+      <Link to="/">Return to home page.</Link>
         <h1>Register here</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputLabel htmlFor="username">Your username</InputLabel>
@@ -51,10 +53,12 @@ const Register = () => {
           <button type="submit">Register</button>
         </form>
       </div>
-      <div>
+      { user &&
+        <div>
         <h1>You are already registered</h1>
         <Link to="/">Return to home page.</Link>
-      </div>
+      </div>}
+
     </div>
   );
 };
