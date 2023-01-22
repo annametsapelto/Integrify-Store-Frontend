@@ -47,7 +47,8 @@
     box-shadow: 1px 1px 1px $shadow-green;
     
     &:hover {
-        transform: translateY(-0.2em);
+        transform: translateY(-0.3em);
+        background-color: rgb(228, 235, 241);
     }
     a:link {
         text-decoration: none;
