@@ -21,7 +21,7 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<CreateUserType> = (data) => {
     dispatch(createUser(data));
-    navigate("");
+    navigate("/");
   };
 
   return (
