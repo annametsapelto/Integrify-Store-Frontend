@@ -22,14 +22,9 @@ export interface EditUserType {
 }
 
 export interface UserReducerType {
-    avatar: string,
-    creationAt: string,
-    email: string,
-    id: number
-    name: string,
-    password: string,
-    role: string,
-    updatedAt: string,
+   userList: UserType[]
+   currentUser: UserType
+   access_token?: string
 }
 
 export interface CredentialsType {

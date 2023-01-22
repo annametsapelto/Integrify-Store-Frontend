@@ -5,7 +5,7 @@ const MyProfile = () => {
   const user = useAppSelector((state) => state.userReducer);
   return (
     <div className="profile">
-      {user ? (
+      {user.currentUser.id != 0 ? (
         <div className="profile_logged">
           <h1>My profile</h1>
           <p>Here is your profile information:</p>

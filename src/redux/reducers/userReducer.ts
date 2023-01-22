@@ -2,8 +2,17 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios, { AxiosError } from 'axios';
 import { UserType, CreateUserType, UserReducerType, CredentialsType, ReturnedCredentialsType } from '../../types/UserType';
 
-const initialState: UserType = null as unknown as UserType;
+const initialState: UserReducerType = {
+  userList: [],
+  currentUser: {
+      id: 0,
+  name: "Guest",
+  role: "customer",
+  email: "",
+  password: "",
+  avatar: ""}
 
+}
 export const fetchAllUsers = createAsyncThunk(
     "fetchAllUsers",
     async () => {
@@ -86,8 +95,7 @@ const userSlice = createSlice({
           if (action.payload instanceof AxiosError) {
             return state;
         } else {
-            localStorage.setItem('user', JSON.stringify(action.payload));
-            console.log("We have a user")
+            state.currentUser = action.payload;
         }})
         build.addCase(authenticateCredentials.rejected, (state, action) => {
           console.log("Error fetching data")
