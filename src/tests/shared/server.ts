@@ -74,36 +74,6 @@ const handler = [
             )
         )
     }),
-    rest.get("https://api.escuelajs.co/api/v1/users", (req, res, context) => {
-        return res(
-            context.json(users)
-        )
-    }),
-    rest.post("https://api.escuelajs.co/api/v1/auth/login", async (req, res, context) => {
-        const {email, password} = await req.json();
-        const foundUser = users.find(user => user.email === email && user.password === password);
-        if(foundUser) {
-            const access_token = jwt.sign(foundUser, 'key');
-            return res(
-                context.json({
-                    access_token
-                })
-            )
-        } else {
-            return res(context.status(401, "Unauthorized"))
-        }
-    }),
-    rest.get("https://api.escuelajs.co/api/v1/auth/profile", async (req, res, context) => {
-        const access_token = req.headers.get("Authorization");
-        if (access_token) {
-            const foundUser = jwt.verify(access_token, "key")
-            return res(
-                context.json(foundUser)
-            )
-        } else {
-            return res(context.status(401, "Unauthorized"))
-        }
-    }),
     rest.post("https://api.escuelajs.co/api/v1/files/upload", async (req, res, context) => {
         const file = await req.json();
         res(

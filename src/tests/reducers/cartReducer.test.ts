@@ -1,9 +1,6 @@
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
 import {createStore, RootState} from "../../redux/store";
-import { CreatedProductType, ProductType } from "../../types/ProductType";
 import { CartItemType } from "../../types/CartItemType";
-import { WritableDraft } from "immer/dist/internal";
-import { UserType } from "../../types/UserType";
 import { AnyAction, ThunkMiddleware } from "@reduxjs/toolkit";
 import { addItemToCart, removeAllItems, removeItemFromCart } from "../../redux/reducers/cartReducer";
 
@@ -37,15 +34,15 @@ beforeEach(() => {
                 name: "Furniture",
                 image: ""
             }} 
-
         };
         store.dispatch(addItemToCart(testProduct));
-    //    store.dispatch(removeItemFromCart(1));
+        store.dispatch(removeItemFromCart(testProduct));
         expect(store.getState().cartReducer.length).toBe(0);
     })
-/*    test("Should remove all items from the cart and give length of 0", () => {
+    test("Should remove all items from the cart and give length of 0", () => {
         const testProduct1: CartItemType = {
             amount: 1,
+            total: 33,
             product: {
             id: 1,
             title: "Apple",
@@ -61,6 +58,7 @@ beforeEach(() => {
         };
         const testProduct2: CartItemType = {
             amount: 3,
+            total: 165,
             product: {
             id: 2,
             title: "Carving",
@@ -78,5 +76,5 @@ beforeEach(() => {
         store.dispatch(addItemToCart(testProduct2));
         store.dispatch(removeAllItems());
         expect(store.getState().cartReducer.length).toBe(0);
-     }) */
+     }) 
 }) 
